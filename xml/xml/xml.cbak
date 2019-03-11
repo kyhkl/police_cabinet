@@ -1,0 +1,108 @@
+#include <stdio.h>
+#include <stdlib.h> // exit(0)
+#include <sqlite3.h>
+#include <pthread.h>//cannot create thread
+#include <dlfcn.h>//undefined 
+#include "cgic.h"              // cgic库的头文件
+#include "ctemplate.h"         // libctemplate库的头文件
+char cross_road_name[64]="莲花路香梅路路口1";
+char device_id[32]="SZ0755003";
+static int nocall(void *NotUsed, int argc, char **argv, char **azColName){
+   return 0;
+}
+static int callback(void *NotUsed, int argc, char **argv, char **azColName){
+   memcpy(cross_road_name,argv[1],64);
+   memcpy(device_id,argv[2],32);
+   //int i;
+   //for(i=0; i<argc; i++){
+   //   printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+   //}
+   //printf("\n");
+}
+
+// main已经定义在cgic.c中，在main函数中会调用cgiMain
+int cgiMain(int argc, char **argv)
+{
+    TMPL_varlist *mainList = 0;
+    TMPL_varlist *personList = 0;
+    TMPL_loop    *loop = 0;
+    
+    
+   sqlite3 *db;
+   char *zErrMsg = 0;
+   int rc;
+   char * sql;
+   char sql_buf[128]={0};
+   const char* data = "Callback function called";
+   
+	   rc = sqlite3_open("sql.db", &db);//create sqlite
+		
+		if( rc ){
+		  fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
+		  return(0);
+		}else{
+		  fprintf(stderr, "Opened database successfully\n");
+	   }
+    
+    /* Create SQL statement */
+      sql = "CREATE TABLE DEVICE_INFO("  \
+         "ID INT PRIMARY KEY     NOT NULL," \
+         "CROSS_NAME             TEXT    NOT NULL," \
+         "DEVICE_ID              TEXT     NOT NULL );";
+
+   /* Execute SQL statement */
+	   rc = sqlite3_exec(db, sql, nocall, 0, &zErrMsg);
+	   if( rc != SQLITE_OK ){
+	   fprintf(stderr, "SQL error: %s\n", zErrMsg);
+		  sqlite3_free(zErrMsg);
+	   }else{
+		  fprintf(stdout, "Table created successfully\n");
+	   }
+	   
+	   
+
+   
+  if(cgiFormSubmitClicked("baseinfo")==cgiFormSuccess)
+    {
+		
+		cgiFormStringNoNewlines("cross_road_name",cross_road_name,64);
+		cgiFormStringNoNewlines("device_id",device_id,32);
+			//update info
+			strcat(sql_buf, "update  device_info set  cross_name='");
+			strcat(sql_buf, cross_road_name);
+			strcat(sql_buf,"' ,device_id='");
+			strcat(sql_buf, device_id);
+			strcat(sql_buf,"'  where id=1;");
+			
+			/* Execute SQL statement */
+		   rc = sqlite3_exec(db, sql_buf, nocall, (void*)data, &zErrMsg);
+		   if( rc != SQLITE_OK ){
+			  fprintf(stderr, "SQL error: %s\n", zErrMsg);
+			  sqlite3_free(zErrMsg);
+		   }else{
+			   sql="successfully";
+			  fprintf(stdout, "write successfully\n");
+		   } 
+	}// have get the data 
+
+	sql="select * from device_info where id =1;";
+	rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
+		   if( rc != SQLITE_OK ){
+			  fprintf(stderr, "SQL error: %s\n", zErrMsg);
+			  sqlite3_free(zErrMsg);
+		   }else{
+			  fprintf(stdout, "read successfully\n");
+		   } 
+    // 使用cgic接口，输出文档类型
+    cgiHeaderContentType("text/html;charset=utf-8");
+    // 把两个家族成员的值加到一个TMPL_loop中，用来显示在表格中
+    // 所有的值都必须是字符串形式
+    personList = TMPL_add_var(0,"addr_name",cross_road_name,"device_id",device_id,0);
+    loop = TMPL_add_varlist(loop, personList);
+    // 再把这个TMPL_loop嵌到值列表中，名字是“Persons”，要与模板中的名字一样
+    mainList = TMPL_add_loop(mainList, "address_name", loop);
+    // 把值列表在模块中显示，模块文件的路径根据需要更改
+   TMPL_write("/www/htdocs/index.html",0,0,mainList,cgiOut,cgiOut);
+    sqlite3_close(db);//create sqlite
+    return 0;
+}

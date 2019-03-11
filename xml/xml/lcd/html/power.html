@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="../css/lcd.css" rel="stylesheet">
+<meta charset="utf-8">
+<title>智能机柜状态信息</title>
+<script src="../js/echarts.js"></script>
+</head>
+
+<body onload="startTime()">
+	<script>
+function startTime(){
+	var today=new Date();
+	var year=today.getFullYear();
+	var month=today.getMonth()+1;
+	var day=today.getDate();
+	var h=today.getHours();
+	var m=today.getMinutes();
+	var s=today.getSeconds();// 在小于10的数字前加一个‘0’
+	m=checkTime(m);
+	s=checkTime(s);
+	document.getElementById('txt').innerHTML=year+"年"+month+"月"+day+"日 "+h+":"+m+":"+s;
+	t=setTimeout(function(){startTime()},500);
+}
+function checkTime(i){
+	if (i<10){
+		i="0" + i;
+	}
+	return i;
+}
+</script>
+	<div style="height:800px; width:1024px;background-image:url('../pic/background.jpg');">
+			<div class="title">
+			<a>箱变配电智能机柜</a>
+			<div  id="txt"  class="sys_div2"></div>
+			<div style="position:absolute; left:90px; top:130px;color:#C0F561;font-size:24px;">电表数据</div>
+			<div style="position:absolute; left:600px; top:130px;color:#C0F561;font-size:24px;">采集数据</div>
+
+			
+			
+			
+		</div>
+		
+		<a></a>
+		
+		<div class="leftside">
+			<div class="boxtd_l">			
+				<table >	
+					<tr>
+						<td class="lefttd">频率    <input id="Hz" type="text" name="test" class="input_style" value="0"/></td>				
+					</tr>		
+					<tr>
+						<td class="lefttd">相电压 Ua<input id="Ua" type="text" name="test" class="input_style" value="0"/></td>				
+					</tr>
+					<tr>
+						<td class="lefttd">相电压 Ub<input id="Ub" type="text" name="test" class="input_style" value="0"/></td>						
+					</tr>
+					<tr>
+						<td class="lefttd">相电压 Uc<input id="Uc" type="text" name="test" class="input_style" value="0"/></td>						
+					</tr>
+					<tr>
+						<td class="lefttd">相电流 Ia<input id="Ia" type="text" name="test" class="input_style" value="0"/></td>
+						
+					</tr>
+					<tr>
+						<td class="lefttd">相电流 Ib<input id="Ib" type="text" name="test" class="input_style" value="0"/></td>					
+					</tr>
+					<tr>
+						<td class="lefttd">相电流 Ic<input id="Ic" type="text" name="test" class="input_style" value="0"/></td>					
+					</tr>
+					<tr>
+						<td class="lefttd">合相有功功率<input id="UT_P" type="text" name="test" class="input_style" value="0"/></td>				
+					</tr>
+					<tr>
+						<td class="lefttd">A 相有功功率<input id="Ua_P" type="text" name="test" class="input_style" value="0"/></td>						
+					</tr>	
+					<tr>
+						<td class="lefttd">B 相有功功率<input id="Ub_P" type="text" name="test" class="input_style" value="0"/></td>
+						
+					</tr>	
+					<tr>
+						<td class="lefttd">C 相有功功率<input id="Uc_P" type="text" name="test" class="input_style" value="0"/></td>						
+					</tr>		
+					
+					<tr>
+						<td class="lefttd">合相无功功率<input id="UT_PV" type="text" name="test" class="input_style" value="0"/></td>
+						
+					</tr>
+					<tr>
+						<td class="lefttd">A 相无功功率<input id="Ua_PV" type="text" name="test" class="input_style" value="0"/></td>						
+					</tr>	
+					<tr>
+						<td class="lefttd">B 相无功功率<input id="Ub_PV" type="text" name="test" class="input_style" value="0"/></td>						
+					</tr>	
+					<tr>
+						<td class="lefttd">C 相无功功率<input id="Uc_PV" type="text" name="test" class="input_style" value="0"/></td>					
+					</tr>			  
+				</table>
+			</div>
+			<div class="boxtd_r">
+				<table>
+					<tr>
+							<td class="lefttd">Hz</td>					
+					</tr>
+					<tr>
+							<td class="lefttd">V</td>					
+					</tr>
+					<tr>
+							<td class="lefttd">V</td>					
+					</tr>	
+					<tr>
+							<td class="lefttd">V</td>					
+					</tr>	
+					<tr>
+							<td class="lefttd">mA</td>					
+					</tr>	
+					<tr>
+							<td class="lefttd">mA</td>					
+					</tr>	
+					<tr>
+							<td class="lefttd">mA</td>					
+					</tr>	
+						<tr>
+							<td class="lefttd">W</td>					
+					</tr>
+					<tr>
+							<td class="lefttd">W</td>					
+					</tr>	
+					<tr>
+							<td class="lefttd">W</td>					
+					</tr>	
+					<tr>
+							<td class="lefttd">W</td>					
+					</tr>	
+					<tr>
+							<td class="lefttd">W</td>					
+					</tr>	
+					<tr>
+							<td class="lefttd">W</td>					
+					</tr>
+					<tr>
+							<td class="lefttd">W</td>					
+					</tr>	
+					<tr>
+							<td class="lefttd">W</td>					
+					</tr>		
+				</table>
+			</div>
+		</div>
+	<!--
+		----------------------------------------------------------------------分-----割----线-----------------------------------------------------------------------------
+	-->
+		<div id="main" class="realize">
+			<div  style="height:30px;width:700px;background:#494843;">
+				<table id="PhaseA">
+					<tr>
+						<td style="color:#33CC00;width:30px"></td>
+						<td style="color:#33CC00">A相负载电流:</td>
+						<td style="width:100px;color:#33CC00">0mA</td>
+						<td style="color:#33CC00">A相负载电流:</td>
+						<td style="width:100px;color:#33CC00">0mA</td>
+					</tr>				  
+				</table>
+			</div>
+			<div id="Phase_A" style="height:150px;width:700px;">
+					<script type="text/javascript">
+						// 基于准备好的dom，初始化echarts实例
+							var myChart_a = echarts.init(document.getElementById('Phase_A'));
+							// 指定图表的配置项和数据
+							var option_a = {
+								textStyle:{
+										color:'#33CC00',
+										fontstyle:'仿宋'	
+									},
+									grid: {
+										left: 30,   //距离左边的距离
+										right: 80, //距离右边的距离
+										bottom: 20,//距离下边的距离
+										top: 10//距离上边的距离
+										},
+								xAxis: {
+									 name:'单位(mA)'
+								},
+								yAxis: {data: ["A1","A2","A3",]},
+								series: [{
+									id:'bar',
+									name: '',
+									type: 'bar',
+									 label: {
+												normal: {
+													position: 'right',
+													 formatter:function(params){
+														 
+														 return params.data+'mA';
+														 },
+													show: true,
+													color:'#33CC00',
+													fontSize:'13',
+													},	
+										},
+										barWidth: '55%',
+										 itemStyle:{
+											normal:{
+												color:new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
+													offset: 0,
+													color: '#00b0ff'
+												}, {
+													offset: 0.8,
+													color: '#7052f4'
+												}], false),
+												 barBorderRadius: 10,
+											}
+										},
+									data: [0,0,0],
+									}],
+								};
+								myChart_a.setOption(option_a);	
+							</script>
+						</div>	</br>
+						<div  style="height:30px;width:700px;background:#494843;">
+							<table id="PhaseB">
+							<tr>
+								<td style="color:#CC3300;width:30px"></td>
+								<td style="color:#CC3300">B相负载电流:</td>
+								<td style="width:100px;color:#CC3300">0mA</td>
+							</tr>				  
+							</table>
+						</div>
+						<div id="Phase_B" style="height:150px;width:700px;">
+							<script type="text/javascript">
+							// 基于准备好的dom，初始化echarts实例
+								var myChart_b = echarts.init(document.getElementById('Phase_B'));
+								// 指定图表的配置项和数据
+								var option_b = {
+									textStyle:{
+											color:'#CC3300',
+											fontstyle:'仿宋'	
+										},
+										grid: {
+										left: 30,   //距离左边的距离
+										right: 80, //距离右边的距离
+										bottom: 20,//距离下边的距离
+										top: 10//距离上边的距离
+										},
+									xAxis: {
+										 name:'单位(mA)'
+									},
+									yAxis: {data: ["B1","B2","B3",]},
+									series: [{
+										id:'bar',
+										name: '',
+										type: 'bar',
+										 label: {
+													normal: {
+														position: 'right',
+														 formatter:function(params){
+															 
+															 return params.data+'mA';
+															 },
+														show: true,
+														color:'#CC3300',
+														fontSize:'13',
+														},	
+											},
+											barWidth: '55%',
+											 itemStyle:{
+												normal:{
+													color:new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
+														offset: 0,
+														color: '#00b0ff'
+													}, {
+														offset: 0.8,
+														color: '#7052f4'
+													}], false),
+													 barBorderRadius: 10,
+												}
+											},
+										data: [0,0,0],
+									}],
+								};
+								myChart_b.setOption(option_b);	
+							</script>
+						</div>	</br>	
+					
+							
+					<div  style="height:30px;width:700px;background:#494843;">
+						<table id="PhaseC" >
+						<tr>
+							<td style="color:#FFCC00;width:30px"></td>
+							<td style="color:#FFCC00">C相负载电流:</td>
+							<td style="width:100px;color:#FFCC00">0mA</td>
+						</tr>				  
+						</table>
+					</div>
+					
+					<div id="Phase_C" style="height:150px;width:700px;">
+						<script type="text/javascript">
+							// 基于准备好的dom，初始化echarts实例
+								var myChart_c = echarts.init(document.getElementById('Phase_C'));
+								// 指定图表的配置项和数据
+								var option_c = {
+									textStyle:{
+											color:'#FFCC00',
+											fontstyle:'仿宋'	
+										},
+									grid: {
+										left: 30,   //距离左边的距离
+										right: 80, //距离右边的距离
+										bottom: 20,//距离下边的距离
+										top: 10//距离上边的距离
+										},
+									xAxis: {
+										 name:'单位(mA)'
+									},
+									yAxis: {data: ["C1","C2","C3",]},
+									series: [{
+										id:'bar',
+										name: '',
+										type: 'bar',
+										 label: {
+													normal: {
+														position: 'right',
+														 formatter:function(params){
+															 
+															 return params.data+'mA';
+															 },
+														show: true,
+														color:'#FFCC00',
+														fontSize:'13',
+														},	
+											},
+											barWidth: '55%',
+											 itemStyle:{
+												normal:{
+													color:new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
+														offset: 0,
+														color: '#00b0ff'
+													}, {
+														offset: 0.8,
+														color: '#7052f4'
+													}], false),
+													 barBorderRadius: 10,
+												}
+											},
+										data: [0,0,0],
+									}],
+								};
+								myChart_c.setOption(option_c);	
+						</script>
+					</div>				
+							
+					
+			<script type="text/javascript">	
+				
+			function power_info_refresh(obj)
+				{
+					var i=0;
+						
+						x=document.getElementById("PhaseA");					
+						x.rows[0].cells[2].innerHTML =obj.MZR.DATA.data[6]+obj.MZR.DATA.data[7]+obj.MZR.DATA.data[8]+'mA';
+						
+						x=document.getElementById("PhaseB");						
+						x.rows[0].cells[2].innerHTML =obj.MZR.DATA.data[9]+obj.MZR.DATA.data[10]+obj.MZR.DATA.data[11]+'mA';
+						
+						x=document.getElementById("PhaseC");						
+						x.rows[0].cells[2].innerHTML =obj.MZR.DATA.data[12]+obj.MZR.DATA.data[13]+obj.MZR.DATA.data[14]+'mA';
+						
+						x=document.getElementById("Hz");
+						x.value=parseInt(obj.ELE_EM.DATA.data[17]*0.01);
+						x=document.getElementById("Ua");
+						x.value=parseInt(obj.ELE_EM.DATA.data[3]*0.1);
+						x=document.getElementById("Ub");
+						x.value=parseInt(obj.ELE_EM.DATA.data[4]*0.1);
+						x=document.getElementById("Uc");
+						x.value=parseInt(obj.ELE_EM.DATA.data[5]*0.1);
+						x=document.getElementById("Ia");
+						x.value=obj.ELE_EM.DATA.data[6];
+						x=document.getElementById("Ib");
+						x.value=obj.ELE_EM.DATA.data[7];
+						x=document.getElementById("Ic");
+						x.value=obj.ELE_EM.DATA.data[8];
+						x=document.getElementById("UT_P");
+						x.value=parseInt(obj.ELE_EM.DATA.data[9]*0.1);
+						x=document.getElementById("Ua_P");
+						x.value=parseInt(obj.ELE_EM.DATA.data[10]*0.1);
+						x=document.getElementById("Ub_P");
+						x.value=parseInt(obj.ELE_EM.DATA.data[11]*0.1);
+						x=document.getElementById("Uc_P");
+						x.value=parseInt(obj.ELE_EM.DATA.data[12]*0.1);
+						x=document.getElementById("UT_PV");
+						x.value=parseInt(obj.ELE_EM.DATA.data[13]*0.1);
+						x=document.getElementById("Ua_PV");
+						x.value=parseInt(obj.ELE_EM.DATA.data[14]*0.1);
+						x=document.getElementById("Ub_PV");
+						x.value=parseInt(obj.ELE_EM.DATA.data[15]*0.1);
+						x=document.getElementById("Uc_PV");
+						x.value=parseInt(obj.ELE_EM.DATA.data[16]*0.1);
+						
+					for(i=0;i<3;i++)
+					{	
+					  option_a.series[0].data[i]=obj.MZR.DATA.data[i+6];
+					  option_b.series[0].data[i]=obj.MZR.DATA.data[i+9];
+					  option_c.series[0].data[i]=obj.MZR.DATA.data[i+12];				  
+					}
+					// 使用刚指定的配置项和数据显示图表。
+					myChart_a.setOption(option_a);
+					myChart_b.setOption(option_b);
+					myChart_c.setOption(option_c);
+				
+				}
+				
+			function loadXMLDoc()
+					{
+						var xmlhttp;
+						
+						if (window.XMLHttpRequest)
+						{
+							// IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+							xmlhttp=new XMLHttpRequest();
+						}
+						else
+						{
+							// IE6, IE5 浏览器执行代码 
+							xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+						}
+						xmlhttp.onreadystatechange=function()
+						{
+							if (xmlhttp.readyState==4 && xmlhttp.status==200)
+							{
+
+							  var obj= JSON.parse(xmlhttp.responseText);
+										power_info_refresh(obj);//更新数据
+										
+							}
+						}
+						xmlhttp.open("GET","/json.txt",true);
+						xmlhttp.send();
+					}
+
+					function doUpdate()   
+					{   
+							loadXMLDoc();
+							window.setTimeout("doUpdate()", 1000);//每三秒刷新一次数据
+					}  
+					doUpdate(); 
+		  </script>
+		  
+		  
+		</div>
+	</div>		
+</body>
+</html>

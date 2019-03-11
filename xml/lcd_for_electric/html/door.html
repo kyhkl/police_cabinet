@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="../css/lcd.css" rel="stylesheet">
+<meta charset="utf-8">
+<title>智能机柜状态信息</title>
+</head>
+
+<body onload="startTime()">
+	<script>
+	function startTime(){
+	var today=new Date();
+	var year=today.getFullYear();
+	var month=today.getMonth()+1;
+	var day=today.getDate();
+	var h=today.getHours();
+	var m=today.getMinutes();
+	var s=today.getSeconds();// 在小于10的数字前加一个‘0’
+	m=checkTime(m);
+	s=checkTime(s);
+	document.getElementById('txt').innerHTML=year+"年"+month+"月"+day+"日 "+h+":"+m+":"+s;
+	t=setTimeout(function(){startTime()},500);
+}
+function checkTime(i){
+	if (i<10){
+		i="0" + i;
+	}
+	return i;
+}
+</script>
+	<div style="height:600px; width:1024px;background-image:url('../pic/background.jpg');">
+			<div class="title">
+			<a >交通信息综合智能管控系统</a>
+			<p   class="sys_p1">路名：莲花路香梅路路口</p>
+			<p   class="sys_p2">编号：SZ755001</p>
+			<div  id="txt"  class="sys_div2"></div>
+		</div>
+	
+		<a></a>
+		
+		<div style="float:left;">
+			<ul>
+			<li><a href="sys.html"    > <img  style="relative:left"                     src="../icon/home.png"/>系统状态</a></li>
+			<li><a href="power.html"  > <img  style="relative:left;left:0px;top:179px;" src="../icon/power.png"/>电力信息 </a></li>
+			<li><a href="ups.html"    > <img  style="relative:left;left:0px;top:225px;" src="../icon/battery.png"/>UPS 状态</a></li>
+			<li><a href="env.html"    > <img  style="relative:left;left:0px;top:271px;" src="../icon/th.png"/>环境状态 </a></li>
+			<li><a href="door.html"   > <img  style="relative:left;left:0px;top:317px;" src="../icon/door.png"/>柜门状态</a></li>
+			<li><a href="air.html"    > <img  style="relative:left;left:0px;top:317px; "src="../icon/coolwind.png"/>空调信息</a></li>
+			<li><a href="thun.html"   > <img  style="relative:left;left:0px;top:317px; "src="../icon/thunder.png"/>防雷参数</a></li>
+<!--
+			<li><a href="camera.html" > <img  style="relative:left;left:0px;top:363px;" src="../icon/camera.png"/>视频监控 </a></li>
+-->
+			</ul>
+		</div>
+
+		<div class="realize" >
+
+			<div style="height:280px;width:240px;position:absolute; left:0px; 	top:80px;" ><img id="front" src="../door/f_c.png"/></div>
+			<div style="height:280px;width:240px;position:absolute; left:280px; top:80px;"><img  id="back" src="../door/b_c.png"/></div>
+			<div style="height:280px;width:240px;position:absolute; left:560px; top:80px;"><img  id="side"  src="../door/c_c.png"/></div>
+
+			<div style="position:absolute; left:80px;  top:358px;color:#42edf8;font-weight:normal;">前视图</div>
+			<div style="position:absolute; left:370px; top:358px;color:#42edf8;font-weight:normal;">后视图</div>
+			<div style="position:absolute; left:610px; top:358px;color:#42edf8;font-weight:normal;">侧视图</div>
+
+		</div>
+	</div>	
+	<script>	
+	
+		function env_info_refresh(obj)
+			{
+				
+				var  door_warn =obj.ENV.DATA.dtu_e_info.sys_warn_t.door_warn;
+				console.log(door_warn);			
+				switch(door_warn&0x03)
+				{
+						case 0:
+							   document.getElementById('front').src ="../door/f_o.png";						 
+							   break;							   
+						case 1:
+							   document.getElementById('front').src ="../door/f_r_o.png";					
+							   break;
+						case 2:
+							   document.getElementById('front').src ="../door/f_l_o.png";							  
+							   break;
+						case 3:
+							   document.getElementById('front').src ="../door/f_c.png";					 						
+				}
+				switch((door_warn&0x18)>>3)
+				{
+						case 0:
+							   document.getElementById('back').src ="../door/b_o.png";							 
+							   break;							   
+						case 1:
+							   document.getElementById('back').src ="../door/b_r_o.png";							
+							   break;
+						case 2:
+							   document.getElementById('back').src ="../door/b_l_o.png";							  
+							   break;
+						case 3:
+							   document.getElementById('back').src ="../door/b_c.png";						 						
+				}
+				if((door_warn&0x04)!=0)
+				  document.getElementById('side').src ="../door/c_c.png";	
+				else
+				  document.getElementById('side').src ="../door/c_o.png";
+				
+				
+				
+
+			}
+		function loadXMLDoc()
+			{
+				var xmlhttp;
+				
+				if (window.XMLHttpRequest)
+				{
+					// IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+					xmlhttp=new XMLHttpRequest();
+				}
+				else
+				{
+					// IE6, IE5 浏览器执行代码 
+					xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				xmlhttp.onreadystatechange=function()
+				{
+					if (xmlhttp.readyState==4 && xmlhttp.status==200)
+					{
+
+					  var obj= JSON.parse(xmlhttp.responseText);
+							env_info_refresh(obj);//更新数据
+					}
+				}
+				xmlhttp.open("get","/json.txt",true);
+				xmlhttp.send();
+			}
+
+			function doUpdate()   
+			{   
+					loadXMLDoc();
+					window.setTimeout("doUpdate()", 1000);//每三秒刷新一次数据
+			}  
+			doUpdate(); 
+	</script>	
+</body>
+</html>

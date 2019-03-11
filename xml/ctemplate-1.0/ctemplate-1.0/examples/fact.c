@@ -1,0 +1,146 @@
+/* This demo prints out a table of factorials */
+
+#include <stdio.h>
+#include <ctemplate.h>
+
+int
+main(int argc, char **argv) {
+    int n, f;
+    char txt1[32], txt2[32];
+    TMPL_varlist *mainlist, *vl;
+    TMPL_loop  *loop;
+
+    loop = 0;
+    f = 1;
+    for (n = 1; n < 11; n++) {
+        sprintf(txt1, "%d", n);
+        sprintf(txt2, "%d", f *= n);
+        vl = TMPL_add_var(0, "n", txt1, "nfact", txt2, 0);
+        loop = TMPL_add_varlist(loop, vl);
+    }
+    mainlist = TMPL_add_var(0, "title", "10 factorials", 0);
+    mainlist = TMPL_add_loop(mainlist, "fact", loop);
+    TMPL_write("fact.tmpl", 0, 0, mainlist, stdout, stderr);
+    TMPL_free_varlist(mainlist);
+    return 0;
+}
+
+
+
+
+----------------
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+#include <libxml/parser.h>
+#include <libxml/tree.h>
+#include <libxml/xmlmemory.h>
+
+#include "cgic.h"              // cgic库的头文件
+#include "ctemplate.h"
+
+#define GCFG_PATH 	"sysconf.xml"
+ 
+/* 解析storyinfo节点，打印keyword节点的内容 */
+void parseStory(xmlDocPtr doc, xmlNodePtr cur){
+	xmlChar* key;
+	cur=cur->xmlChildrenNode;
+	while(cur != NULL){
+		/* 找到keyword子节点 */
+		if(!xmlStrcmp(cur->name, (const xmlChar *)"keyword")){
+			key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
+			printf("keyword: %s\n", key);
+			xmlFree(key);
+		}
+		cur=cur->next; /* 下一个子节点 */
+	}
+ 
+	return;
+}
+ 
+/* 解析文档 */
+static void parseDoc(char *docname){
+	/* 定义文档和节点指针 */
+	xmlDocPtr doc;
+	xmlNodePtr cur;
+	
+	/* 进行解析，如果没成功，显示一个错误并停止 */
+	doc = xmlParseFile(docname);
+	if(doc == NULL){
+		fprintf(stderr, "Document not parse successfully. \n");
+		return;
+	}
+ 
+	/* 获取文档根节点，若无内容则释放文档树并返回 */
+	cur = xmlDocGetRootElement(doc);
+	if(cur == NULL){
+		fprintf(stderr, "empty document\n");
+		xmlFreeDoc(doc);
+		return;
+	}
+ 
+	/* 确定根节点名是否为story，不是则返回 */
+	if(xmlStrcmp(cur->name, (const xmlChar *)"story")){
+		fprintf(stderr, "document of the wrong type, root node != story");
+		xmlFreeDoc(doc);
+		return;
+	}
+ 
+	/* 遍历文档树 */
+	cur = cur->xmlChildrenNode;
+	while(cur != NULL){
+		/* 找到storyinfo子节点 */
+		if(!xmlStrcmp(cur->name, (const xmlChar *)"storyinfo")){
+			parseStory(doc, cur); /* 解析storyinfo子节点 */
+		}
+		cur = cur->next; /* 下一个子节点 */
+	}
+ 
+	xmlFreeDoc(doc); /* 释放文档树 */
+	return;
+}
+char user[10]="YangYi";
+char age [5]="18";
+char sex [5]="man";
+char tel [12]="18703829350";
+char * inputstr=NULL;
+// main已经定义在cgic.c中，在main函数中会调用cgiMain
+int cgiMain()
+{
+
+	int n, f;	
+	char txt1[32], txt2[32];
+    TMPL_varlist *mainlist, *vl;
+    TMPL_varlist *personList = 0;
+    TMPL_loop    *loop = 0;
+	char i=0;
+    cgiHeaderContentType("text/html;charset=utf-8");
+    
+    if(cgiFormSubmitClicked("baseinfo")==cgiFormSuccess)
+    {
+		cgiFormStringNoNewlines("user",user,10);
+		cgiFormStringNoNewlines("age",age,5);
+		cgiFormStringNoNewlines("sex",sex,5);
+		cgiFormStringNoNewlines("tel",tel,12);
+	}// have get the data
+    	
+    f = 1;
+    for (n = 1; n < 11; n++) {
+        sprintf(txt1, "%d", n);
+        sprintf(txt2, "%d", f *= n);
+        vl = TMPL_add_var(0, "n", txt1, "nfact", txt2, 0);
+        loop = TMPL_add_varlist(loop, vl);
+    }
+    mainlist = TMPL_add_var(0, "title", "10 factorials", 0);
+    mainlist = TMPL_add_loop(mainlist, "fact", loop);
+    TMPL_write("index.tmpl", 0, 0, mainlist, stdout, stderr);
+    TMPL_free_varlist(mainlist);
+    return 0;
+}
+
+
+
+
+
+

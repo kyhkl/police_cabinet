@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p_config>
+	<p_highest>
+	  <road_h1>15</road_h1>
+	  <road_h2>15</road_h2>
+	  <road_h3>15</road_h3>
+	  <road_h4>15</road_h4>
+	  <road_h5>15</road_h5>
+	  <road_h6>15</road_h6>
+	  <road_h7>15</road_h7>
+	  <road_h8>15</road_h8>
+	  <road_h9>15</road_h9>
+	</p_highest>
+	<p_lowest>
+	  <road_l1>150</road_l1>
+	  <road_l2>150</road_l2>
+	  <road_l3>150</road_l3>
+	  <road_l4>150</road_l4>
+	  <road_l5>150</road_l5>
+	  <road_l6>150</road_l6>
+	  <road_l7>150</road_l7>
+	  <road_l8>150</road_l8>
+	  <road_l9>150</road_l9>
+	</p_lowest>
+	<name>
+	<road_n1>路口1</road_n1>
+	<road_n2>路口2</road_n2>
+	<road_n3>路口3</road_n3>
+	<road_n4>路口4</road_n4>
+	<road_n5>路口5</road_n5>
+	<road_n6>路口6</road_n6>
+	<road_n7>路口7</road_n7>
+	<road_n8>路口8</road_n8>
+	<road_n9>路口9</road_n9>
+	<name>
+</p_config>

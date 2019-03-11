@@ -1,0 +1,172 @@
+
+html,body{
+	background:#494843;
+	margin:0 auto;
+}
+
+.title{
+	height:90px;
+	width:770px;
+	font-weight:bold;
+	font-size:2.6em;
+	font-family:仿宋;
+	color:#54e7f1;
+	padding:20px 0px 0px 330px;
+	float:left;
+	
+
+}
+.title_rt{
+	height:55px;
+	width:800px;
+/*
+	background-color:#F2F1F0;
+*/
+	float:left;
+}
+
+.realize{
+	height:480px;
+	width:800px;
+	font-size:20px;
+	font-family:仿宋;
+	color:#3dd1db;
+
+/*
+	background-color:#A5EF9D;
+*/
+
+	position:absolute;
+	left:300px;
+	top:160px;
+	float:left;
+	
+}
+
+
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 180px;
+	font-family:仿宋;
+	font-size:22px;
+
+/*
+    background-color: #36AB2A;
+*/
+}
+
+li a {
+    display: block;
+    color: #3dd1db;
+    padding: 8px 16px;
+	font-weight:bold;
+	padding:15px 5px 10px 30px;
+	border-bottom-style:solid;
+    border-width:1px;
+	border-color:#3A5531;
+    text-decoration: none;
+    height:25px;
+}
+
+li a.active {
+
+    background-color: #2477E0;
+
+    color: #67CE44;
+}
+
+li a:hover:not(.active) {
+
+    background-color: #2477E0;
+
+    color: #67CE44;
+}
+
+.sys_p1
+{
+	font-size:14px;
+	color:#e5d285;
+	 position:absolute;
+	 left:8px;
+	 top:520px;
+	 font-weight:normal;
+}
+
+.sys_p2
+{
+	font-size:14px;
+	color:#e5d285;
+	 position:absolute;
+	 left:8px;
+	 top:540px;
+	 font-weight:normal;
+}
+
+.sys_div1
+{
+	font-family:仿宋;
+	font-size:16px;
+	height:600px; 
+	width:1024px;
+	background-image:url('../pic/home.jpg');
+}
+
+
+.sys_div2
+{
+	font-size:14px;
+	color:#FFFFFF; 
+	font-family:仿宋;
+	font-weight:normal;
+	position:absolute;
+	left:850px;
+	top :775px;
+}
+
+.leftside
+{
+	height:585px; 
+	width:240px;
+	border:5px;
+	border-style:groove;
+	border-color:#618330;
+	border-radius:15px;
+	 position:absolute;
+	 left:30px;
+	 top:160px;
+}
+.boxtd_l
+{
+	height:500px; 
+	width:110px;
+	float:left;
+}
+
+.boxtd_r
+{
+	height:500px; 
+	width:30px;
+	float:left;
+
+	 position:absolute;
+	 left:180px;
+	 top:2px;
+}
+
+.input_style
+{
+ width:60px;
+ background:#1D6F8F;
+ text-align:center;
+ position:absolute;
+ left:110px;
+}
+
+.lefttd
+{
+	color:#33CC00;
+	height:35px;
+}

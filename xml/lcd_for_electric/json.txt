@@ -1,0 +1,257 @@
+{
+	"MZR" : {
+		"CMD" : "MZR",
+		"version" : "V1.0",
+		"DATA" : {
+			"type" : 1,
+			"err_type" : 24,
+			"data" : [
+				0,
+				50,
+				238,
+				0,
+				0,
+				0,
+				0,
+				861,
+				1512,
+				91,
+				0,
+				791,
+				3892,
+				0,
+				0
+			]
+		}
+	},
+	"UPS" : {
+		"CMD" : "UPS",
+		"version" : "V1.0",
+		"DATA" : {
+			"type" : 2,
+			"err_type" : 1,
+			"bms_info" : {
+				"pack_data" : [
+					{
+						"pack_vol" : 0,
+						"current" : 0,
+						"soc" : 0,
+						"mAH" : 0,
+						"fds_bit" : {
+							"ov" : 0,
+							"uv" : 0,
+							"oc" : 0,
+							"sc" : 0,
+							"ot" : 0,
+							"ut" : 0,
+							"rv" : 0,
+							"oc0" : 0,
+							"res" : 0
+						},
+						"mod_num" : 0,
+						"module_data" : [
+							{
+								"T1" : 0,
+								"T2" : 0,
+								"T3" : 0,
+								"mode_vol" : 0,
+								"cell_num" : 0,
+								"cell_vol" : [
+									0,
+									0,
+									0,
+									0,
+									0,
+									0,
+									0,
+									0
+								]
+							},
+							{
+								"T1" : 0,
+								"T2" : 0,
+								"T3" : 0,
+								"mode_vol" : 0,
+								"cell_num" : 0,
+								"cell_vol" : [
+									0,
+									0,
+									0,
+									0,
+									0,
+									0,
+									0,
+									0
+								]
+							}
+						]
+					},
+					{
+						"pack_vol" : 0,
+						"current" : 0,
+						"soc" : 0,
+						"mAH" : 0,
+						"mod_num" : 0,
+						"fds_bit" : {
+							"ov" : 0,
+							"uv" : 0,
+							"oc" : 0,
+							"sc" : 0,
+							"ot" : 0,
+							"ut" : 0,
+							"rv" : 0,
+							"oc0" : 0,
+							"res" : 0
+						},
+						"module_data" : [
+							{
+								"T1" : 0,
+								"T2" : 0,
+								"T3" : 0,
+								"mode_vol" : 0,
+								"cell_num" : 0,
+								"cell_vol" : [
+									0,
+									0,
+									0,
+									0,
+									0,
+									0,
+									0,
+									0
+								]
+							},
+							{
+								"T1" : 0,
+								"T2" : 0,
+								"T3" : 0,
+								"mode_vol" : 0,
+								"cell_num" : 0,
+								"cell_vol" : [
+									0,
+									0,
+									0,
+									0,
+									0,
+									0,
+									0,
+									0
+								]
+							}
+						]
+					}
+				],
+				"inv_data" : {
+					"chgr_voltage" : 0,
+					"chgr_power" : 0,
+					"chgr_current" : 0,
+					"ac_lin_status" : 0,
+					"bit" : {
+						"ac_out_ok" : 0,
+						"reserved1" : 0,
+						"line_mod" : 0,
+						"out_src" : 0,
+						"reserved2" : 0
+					},
+					"out_power" : 0,
+					"out_voltage" : 0,
+					"out_frquency" : 0,
+					"in_power" : 0,
+					"in_voltage" : 0,
+					"in_current" : 0
+				}
+			}
+		}
+	},
+	"ENV" : {
+		"CMD" : "ENV",
+		"version" : "V1.0",
+		"DATA" : {
+			"type" : 3,
+			"err_type" : 0,
+			"dtu_e_info" : {
+				"sys_warn_t" : {
+					"door_warn" : 31,
+					"t_h_warn1" : 0,
+					"t_h_warn2" : 0,
+					"smok_water_warn" : 56
+				},
+				"float_th_t" : {
+					"t1" : 32.099998,
+					"h1" : 70.059669,
+					"t2" : 31.700001,
+					"h2" : 70.059669,
+					"t3" : 34,
+					"h3" : 70.059669,
+					"t4" : 34.563332,
+					"h4" : 70.059669
+				}
+			}
+		}
+	},
+	"air_cond" : {
+		"CMD" : "air_cond",
+		"version" : "V1.0",
+		"DATA" : {
+			"type" : 4,
+			"err_type" : 0,
+			"air_cond_info" : {
+				"run_bit" : {
+					"in_fan1" : 0,
+					"in_fan2" : 1,
+					"out_fan1" : 1,
+					"out_fan2" : 0,
+					"out_fan3" : 0,
+					"hd_fan" : 0,
+					"heating" : 0,
+					"cooling" : 0,
+					"alarm_rel" : 0,
+					"sys" : 0,
+					"in_fan" : 0
+				},
+				"alarm_bit" : {
+					"in_fan1" : 0,
+					"in_fan2" : 0,
+					"out_fan1" : 0,
+					"out_fan2" : 0,
+					"out_fan3" : 0,
+					"hd_fan" : 0,
+					"in_sensor" : 0,
+					"in_h_temp" : 0,
+					"in_l_temp" : 0,
+					"out_sensor" : 0,
+					"out_h_temp" : 0,
+					"h_voltage" : 0,
+					"l_voltage" : 0,
+					"comp_h_pressure" : 0
+				},
+				"set" : {
+					"cool_start_temp" : 20,
+					"hot_start_temp" : -5,
+					"h_temp_alarm" : 55,
+					"l_temp_alarm" : -35,
+					"out_htemp_alarm" : 65,
+					"in_sensor_cal" : 0,
+					"out_sensor_cal" : 0,
+					"cool_sensibility" : 5,
+					"hot_sensibility" : 10,
+					"h_voltage_alarm" : 58,
+					"l_voltage_alarm" : 21,
+					"ambient_temp_cal" : 0,
+					"alarm_en" : true,
+					"alarm_sound_en" : true,
+					"lcd_temp_unit" : false,
+					"addr" : 1,
+					"cool_interval" : 3.5,
+					"hot_interval" : 0
+				},
+				"data" : {
+					"in_temp" : 37,
+					"out_temp" : 40,
+					"voltage" : 32
+				}
+			}
+		}
+	}
+}
+

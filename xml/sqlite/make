@@ -1,0 +1,1 @@
+sudo gcc -I./ sqlite3.c sqlite.c -o app -lpthread -ldl

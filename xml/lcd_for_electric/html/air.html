@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="../css/lcd.css" rel="stylesheet">
+<meta charset="utf-8">
+<title>智能机柜状态信息</title>
+</head>
+
+<body onload="startTime()">
+	<script>
+	function startTime(){
+	var today=new Date();
+	var year=today.getFullYear();
+	var month=today.getMonth()+1;
+	var day=today.getDate();
+	var h=today.getHours();
+	var m=today.getMinutes();
+	var s=today.getSeconds();// 在小于10的数字前加一个‘0’
+	m=checkTime(m);
+	s=checkTime(s);
+	document.getElementById('txt').innerHTML=year+"年"+month+"月"+day+"日 "+h+":"+m+":"+s;
+	t=setTimeout(function(){startTime()},500);
+}
+function checkTime(i){
+	if (i<10){
+		i="0" + i;
+	}
+	return i;
+}
+</script>
+	<div style="height:600px; width:1024px;background-image:url('../pic/air_back_ground.png');">
+			<div class="title">
+			<a >交通信息综合智能管控系统</a>
+			<p   class="sys_p1">路名：莲花路香梅路路口</p>
+			<p   class="sys_p2">编号：SZ755001</p>
+			<div  id="txt"  class="sys_div2"></div>
+		</div>
+	
+		<a></a>
+		
+		<div style="float:left;">
+			<ul>
+			<li><a href="sys.html"    > <img  style="relative:left"                     src="../icon/home.png"/>系统状态</a></li>
+			<li><a href="power.html"  > <img  style="relative:left;left:0px;top:179px;" src="../icon/power.png"/>电力信息 </a></li>
+			<li><a href="ups.html"    > <img  style="relative:left;left:0px;top:225px;" src="../icon/battery.png"/>UPS 状态</a></li>
+			<li><a href="env.html"    > <img  style="relative:left;left:0px;top:271px;" src="../icon/th.png"/>环境状态 </a></li>
+			<li><a href="door.html"   > <img  style="relative:left;left:0px;top:317px;" src="../icon/door.png"/>柜门状态</a></li>
+			<li><a href="air.html"    > <img  style="relative:left;left:0px;top:317px; "src="../icon/coolwind.png"/>空调信息</a></li>
+			<li><a href="thun.html"   > <img  style="relative:left;left:0px;top:317px; "src="../icon/thunder.png"/>防雷参数</a></li>
+<!--
+			<li><a href="camera.html" > <img  style="relative:left;left:0px;top:363px;" src="../icon/camera.png"/>视频监控 </a></li>
+-->
+			</ul>
+		</div>
+
+		<div class="realize" >
+
+
+		<div style="height:180px;width:240px;position:absolute; left:140px; 	top:80px;" ><img id="fan" src="../pic/fan_stop.png"/></div>	
+		<div style="height:80px;width:240px;position:absolute; left:145px; 	top:150px;"><p style="font-weight:bold;color:white">风机状态</p></div>	
+		<div style="height:180px;width:240px;position:absolute; left:390px; 	top:90px;" ><img id="cool" src="../pic/cool_close.png"/></div>	
+		<div style="height:80px;width:240px;position:absolute; left:390px; 	top:150px;"><p style="font-weight:bold;color:white">制冷状态</p></div>		
+		<div style="height:180px;width:240px;position:absolute; left:140px; 	top:240px;" ><p id="in_tmp" style="font-weight:bold;color:#5DF338;font-size:48px;">24℃</p></div>	
+		<div style="height:80px;width:240px;position:absolute; left:150px; 	top:342px;"><p style="font-weight:bold;color:white">内循环</p></div>	
+		<div style="height:180px;width:240px;position:absolute; left:385px; 	top:240px;" ><p id="out_tmp" style="font-weight:bold;color:yellow;font-size:48px;">46℃</p></div>	
+		<div style="height:80px;width:240px;position:absolute; left:400px; 	top:342px;"><p style="font-weight:bold;color:white">外循环</p></div>
+
+
+		</div>
+	</div>	
+	<script>	
+	
+		function air_info_refresh(obj)
+			{
+
+				if(obj.air_cond.DATA.air_cond_info.run_bit.in_fan)
+				document.getElementById("fan").src="../pic/fan_run.gif";
+				else
+				document.getElementById("fan").src="../pic/fan_stop.png";
+				
+				if(obj.air_cond.DATA.air_cond_info.run_bit.cooling)
+				document.getElementById("cool").src="../pic/cool_open.png";
+				else
+				document.getElementById("cool").src="../pic/cool_close.png";
+				document.getElementById("in_tmp").innerHTML=obj.air_cond.DATA.air_cond_info.data.in_temp+'℃';
+				document.getElementById("out_tmp").innerHTML=obj.air_cond.DATA.air_cond_info.data.out_temp+'℃';	
+
+			}
+		function loadXMLDoc()
+			{
+				var xmlhttp;
+				
+				if (window.XMLHttpRequest)
+				{
+					// IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+					xmlhttp=new XMLHttpRequest();
+				}
+				else
+				{
+					// IE6, IE5 浏览器执行代码 
+					xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				xmlhttp.onreadystatechange=function()
+				{
+					if (xmlhttp.readyState==4 && xmlhttp.status==200)
+					{
+
+					  var obj= JSON.parse(xmlhttp.responseText);
+							air_info_refresh(obj);//更新数据
+					}
+				}
+				xmlhttp.open("get","/json.txt",true);
+				xmlhttp.send();
+			}
+
+			function doUpdate()   
+			{   
+					loadXMLDoc();
+					window.setTimeout("doUpdate()", 1000);//每三秒刷新一次数据
+			}  
+			doUpdate(); 
+	</script>	
+</body>
+</html>
