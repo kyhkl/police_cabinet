@@ -16,7 +16,7 @@
 				var str = cars.join('-');//转化为字符串
 				if((str == cmp_str)||(str == cmp_str1))//比较
 				{
-				 window.open("set.html","_self")
+				 window.open("set.html","_self");
 				 i=0;
 				 cars[0]=0;
 				 cars[1]=0;
@@ -37,7 +37,7 @@
         var s=today.getSeconds();// 在小于10的数字前加一个‘0’
         m=checkTime(m);
         s=checkTime(s);
-       // document.getElementById('txt').innerHTML=year+"年"+month+"月"+day+"日 "+h+":"+m+":"+s;
+        document.getElementById('txt').innerHTML=year+"年"+month+"月"+day+"日 "+h+":"+m+":"+s;
         t=setTimeout(function(){startTime()},500);
     }
     function checkTime(i){
@@ -375,17 +375,17 @@
              <div   class="prase_define">     
                 <TMPL_LOOP name="define">
                  <table >               
-                     <tr><td> <input id="A3" type="text"  class="prase_style" style="margin-top:40px"  value="<TMPL_VAR name="a3_define"/>"/></td></tr>
-                     <tr><td> <input id="A2" type="text"  class="prase_style" style="margin-top:80px"  value="<TMPL_VAR name="a2_define"/>"/></td></tr>
-                     <tr><td> <input id="A1" type="text"  class="prase_style" style="margin-top:120px" value="<TMPL_VAR name="a1_define"/>"/></td></tr>
+                     <tr><td> <input id="A3" type="text"  class="prase_style" style="margin-top:30px"  value="<TMPL_VAR name="a3_define"/>"   disabled="true"/></td></tr>
+                     <tr><td> <input id="A2" type="text"  class="prase_style" style="margin-top:70px"  value="<TMPL_VAR name="a2_define"/>"   disabled="true"/></td></tr>
+                     <tr><td> <input id="A1" type="text"  class="prase_style" style="margin-top:110px" value="<TMPL_VAR name="a1_define"/>"   disabled="true"/></td></tr>
                       
-                     <tr><td> <input id="B3" type="text"  class="prase_style" style="margin-top:240px" value="<TMPL_VAR name="b3_define"/>"/></td></tr>
-                     <tr><td> <input id="B2" type="text"  class="prase_style" style="margin-top:280px" value="<TMPL_VAR name="b2_define"/>"/></td></tr>
-                     <tr><td> <input id="B1" type="text"  class="prase_style" style="margin-top:320px" value="<TMPL_VAR name="b1_define"/>"/></td></tr>
+                     <tr><td> <input id="B3" type="text"  class="prase_style" style="margin-top:220px" value="<TMPL_VAR name="b3_define"/>"   disabled="true"/></td></tr>
+                     <tr><td> <input id="B2" type="text"  class="prase_style" style="margin-top:260px" value="<TMPL_VAR name="b2_define"/>"   disabled="true"/></td></tr>
+                     <tr><td> <input id="B1" type="text"  class="prase_style" style="margin-top:300px" value="<TMPL_VAR name="b1_define"/>"   disabled="true"/></td></tr>
                      
-                     <tr><td> <input id="C3" type="text"  class="prase_style" style="margin-top:440px" value="<TMPL_VAR name="c3_define"/>"/></td></tr>
-                     <tr><td> <input id="C2" type="text"  class="prase_style" style="margin-top:480px" value="<TMPL_VAR name="c2_define"/>"/></td></tr>
-                     <tr><td> <input id="C1" type="text"  class="prase_style" style="margin-top:520px" value="<TMPL_VAR name="c1_define"/>"/></td></tr>
+                     <tr><td> <input id="C3" type="text"  class="prase_style" style="margin-top:410px" value="<TMPL_VAR name="c3_define"/>"   disabled="true"/></td></tr>
+                     <tr><td> <input id="C2" type="text"  class="prase_style" style="margin-top:450px" value="<TMPL_VAR name="c2_define"/>"   disabled="true"/></td></tr>
+                     <tr><td> <input id="C1" type="text"  class="prase_style" style="margin-top:490px" value="<TMPL_VAR name="c1_define"/>"   disabled="true"/></td></tr>
                  </table>
                </TMPL_LOOP >
              </div>
@@ -530,7 +530,7 @@
     <div class="log">
                 <p  style="color:#C0F561;font-size:24px;height:35px;margin: 0px;">日志信息</p>
                             
-                <textarea id="log_txt" rows="10" cols="124"  style=" text-align: left; border: 3px solid green;background: transparent;color: aqua">               
+        <textarea id="log_txt" rows="10" cols="124"  style=" text-align: left; border: 3px solid green;background: transparent;color: aqua">               
         A3电流过载报警    2019-1-11 10:35:47
         A2电流过载报警    2019-1-11 10:35:47
         A1电流过载报警    2019-1-11 10:35:47               

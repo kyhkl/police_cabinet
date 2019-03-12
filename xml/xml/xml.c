@@ -74,7 +74,9 @@ int cgiMain(int argc, char **argv)
     TMPL_varlist *netList = 0;
     TMPL_loop    *loop = 0;
     TMPL_loop    *loop1 = 0;
-    
+    FILE *fp = NULL;
+    char val_buf[2048];
+    int pos = 0;
    sqlite3 *db;
    char *zErrMsg = 0;
    int rc;
@@ -132,9 +134,9 @@ int cgiMain(int argc, char **argv)
 		cgiFormStringNoNewlines("a2_warn",a2_warn,8);
 		cgiFormStringNoNewlines("a1_warn",a1_warn,8);
 		cgiFormStringNoNewlines("b3_warn",b3_warn,8);
-		cgiFormStringNoNewlines("b3_warn",b3_warn,8);
 		cgiFormStringNoNewlines("b2_warn",b2_warn,8);
-		cgiFormStringNoNewlines("c1_warn",c1_warn,8);
+		cgiFormStringNoNewlines("b1_warn",b1_warn,8);
+		cgiFormStringNoNewlines("c3_warn",c3_warn,8);
 		cgiFormStringNoNewlines("c2_warn",c2_warn,8);
 		cgiFormStringNoNewlines("c1_warn",c1_warn,8);
 		
@@ -161,8 +163,8 @@ int cgiMain(int argc, char **argv)
 			strcat(sql_buf,"' ,a3_define='");
 			strcat(sql_buf, a3_define);
 			strcat(sql_buf,"' ,a2_define='");
-			strcat(sql_buf, a1_define);
-			strcat(sql_buf,"' ,a2_define='");
+			strcat(sql_buf, a2_define);
+			strcat(sql_buf,"' ,a1_define='");
 			strcat(sql_buf, a1_define);
 			
 			strcat(sql_buf,"' ,b3_define='");
@@ -244,14 +246,40 @@ int cgiMain(int argc, char **argv)
     netList= TMPL_add_var(netList,"b1_warn",b1_warn,"c3_warn",c3_warn,0); 
     netList= TMPL_add_var(netList,"c2_warn",c2_warn,"c1_warn",c1_warn,0); 
     loop1 = TMPL_add_varlist(loop1, netList);
+    
     mainList = TMPL_add_loop(mainList, "define", loop1);
 	TMPL_write("/www/htdocs/power.html",0,0,mainList,cgiOut,cgiOut);
     
-    
-    
-    
-    
+    fp=fopen( "val.txt", "w+" );
+    pos = sprintf(&val_buf[pos], "{\"cross_road_name\":\"%s\",\r\n",cross_road_name);
+    pos += sprintf(&val_buf[pos], "\"device_id\":\"%s\",\r\n",device_id);
+    pos += sprintf(&val_buf[pos], "\"ip1\":\"%s\",\r\n",ip1);
+    pos += sprintf(&val_buf[pos], "\"mask1\":\"%s\",\r\n",mask1);
+    pos += sprintf(&val_buf[pos], "\"gateway1\":\"%s\",\r\n",gateway1);
+    pos += sprintf(&val_buf[pos], "\"ip2\":\"%s\",\r\n",ip2);
+    pos += sprintf(&val_buf[pos], "\"mask2\":\"%s\",\r\n",mask2);
+    pos += sprintf(&val_buf[pos], "\"gateway2\":\"%s\",\r\n",gateway2);
+    pos += sprintf(&val_buf[pos], "\"a3_define\":\"%s\",\r\n",a3_define);
+    pos += sprintf(&val_buf[pos], "\"a2_define\":\"%s\",\r\n",a2_define);
+    pos += sprintf(&val_buf[pos], "\"a1_define\":\"%s\",\r\n",a1_define);
+    pos += sprintf(&val_buf[pos], "\"b3_define\":\"%s\",\r\n",b3_define);
+    pos += sprintf(&val_buf[pos], "\"b2_define\":\"%s\",\r\n",b2_define);
+    pos += sprintf(&val_buf[pos], "\"b1_define\":\"%s\",\r\n",b1_define);
+    pos += sprintf(&val_buf[pos], "\"c3_define\":\"%s\",\r\n",c3_define);
+    pos += sprintf(&val_buf[pos], "\"c2_define\":\"%s\",\r\n",c2_define);
+    pos += sprintf(&val_buf[pos], "\"c1_define\":\"%s\",\r\n",c1_define);
+    pos += sprintf(&val_buf[pos], "\"a3_warn\":\"%s\",\r\n",a3_warn);
+    pos += sprintf(&val_buf[pos], "\"a2_warn\":\"%s\",\r\n",a2_warn);
+    pos += sprintf(&val_buf[pos], "\"a1_warn\":\"%s\",\r\n",a1_warn);
+    pos += sprintf(&val_buf[pos], "\"b3_warn\":\"%s\",\r\n",b3_warn);
+    pos += sprintf(&val_buf[pos], "\"b2_warn\":\"%s\",\r\n",b2_warn);
+    pos += sprintf(&val_buf[pos], "\"b1_warn\":\"%s\",\r\n",b1_warn);
+    pos += sprintf(&val_buf[pos], "\"c3_warn\":\"%s\",\r\n",c3_warn);
+    pos += sprintf(&val_buf[pos], "\"c2_warn\":\"%s\",\r\n",c2_warn);
+    pos += sprintf(&val_buf[pos], "\"c1_warn\":\"%s\"\r\n}",c1_warn);
 	
+     fputs(val_buf, fp);
+    
     sqlite3_close(db);//create sqlite
     return 0;
 }

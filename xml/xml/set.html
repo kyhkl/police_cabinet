@@ -16,8 +16,8 @@
 				
 					<form   name="theForm"  action="xml.cgi"  method="post" >
                         <div  class="set_add_warn" >
-                            <p style="color:#C0F561;font-size:16px;">路口名称设置 : <input type="text" name="cross_road_name" id="crossname" style="width:160px;height:16px; background-color:#0B82E4;border-radius:5px;" ></p>
-                            <p style="color:#C0F561;font-size:16px;">设备编号设置 : <input type="text" name="device_id"       id="deviceid"  style="width:160px;height:16px; background-color:#0B82E4;border-radius:5px;" ></p>
+                            <p style="color:#C0F561;font-size:16px;">路口名称设置 :<input type="text" name="cross_road_name" id="crossname" style="width:160px;height:16px; background-color:#0B82E4;border-radius:5px;" ></p>
+                            <p style="color:#C0F561;font-size:16px;">设备编号设置 :<input type="text" name="device_id"       id="deviceid"  style="width:160px;height:16px; background-color:#0B82E4;border-radius:5px;" ></p>
                             <p style="color:#C0F561;font-size:16px;">本地网络1设置:<input type="text" name="ip1" id="ip1" style="width:160px;height:16px; background-color:#0B82E4;border-radius:5px;" ></p> 
                             <p style="color:#C0F561;font-size:16px;">子网掩码1设置:<input type="text" name="mask1" id="mask1" style="width:160px;height:16px; background-color:#0B82E4;border-radius:5px;" ></p>
                             <p style="color:#C0F561;font-size:16px;">默认网关1设置:<input type="text" name="gateway1" id="gateway1" style="width:160px;height:16px; background-color:#0B82E4;border-radius:5px;" ></p> 
@@ -111,12 +111,78 @@
     <script>
 		function read() 
 		{	
-			var crossname =localStorage.getItem("crossname"); 
-		   	var deviceid = localStorage.getItem("deviceid"); 
-		   	 document.getElementById("crossname").defaultValue =crossname;
-		   	 document.getElementById("deviceid").defaultValue =deviceid;   	 
+		//	var crossname =localStorage.getItem("crossname"); 
+		  // 	var deviceid = localStorage.getItem("deviceid"); 
+		  // 	 document.getElementById("crossname").defaultValue =crossname;
+		   //	 document.getElementById("deviceid").defaultValue =deviceid;   	 
 		}
 		read();
     </script>
+    
+    <script>
+        
+        function set_info_refresh(obj)
+				{
+                        document .getElementById ("crossname").value=obj.cross_road_name ; 
+						document .getElementById ("deviceid").value=obj.device_id ; 	
+                        document .getElementById ("ip1").value=obj.ip1 ; 
+                        document .getElementById ("mask1").value=obj.mask1 ; 
+                        document .getElementById ("gateway1").value=obj.gateway1 ; 
+                        document .getElementById ("ip2").value=obj.ip2 ; 
+                        document .getElementById ("mask2").value=obj.mask2 ; 
+                        document .getElementById ("gateway2").value=obj.gateway2 ; 
+                        document .getElementById ("a3_define").value=obj.a3_define ; 
+                        document .getElementById ("a2_define").value=obj.a2_define ; 
+                        document .getElementById ("a1_define").value=obj.a1_define ; 
+                        document .getElementById ("b3_define").value=obj.b3_define ; 
+                        document .getElementById ("b2_define").value=obj.b2_define ; 
+                        document .getElementById ("b1_define").value=obj.b1_define ; 
+                        document .getElementById ("c3_define").value=obj.c3_define ; 
+                        document .getElementById ("c2_define").value=obj.c2_define ; 
+                        document .getElementById ("c1_define").value=obj.c1_define ;
+                        document .getElementById ("a3_warn").value=obj.a3_warn ; 
+                        document .getElementById ("a2_warn").value=obj.a2_warn ; 
+                        document .getElementById ("a1_warn").value=obj.a1_warn ; 
+                        document .getElementById ("b3_warn").value=obj.b3_warn ; 
+                        document .getElementById ("b2_warn").value=obj.b2_warn ; 
+                        document .getElementById ("b1_warn").value=obj.b1_warn ; 
+                        document .getElementById ("c3_warn").value=obj.c3_warn ; 
+                        document .getElementById ("c2_warn").value=obj.c2_warn ; 
+                        document .getElementById ("c1_warn").value=obj.c1_warn ; 
+                         
+				}
+        
+        function loadXMLDoc()
+					{
+						var xmlhttp;
+						var i=0;
+						if (window.XMLHttpRequest)
+						{
+							// IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+							xmlhttp=new XMLHttpRequest();
+						}
+						else
+						{
+							// IE6, IE5 浏览器执行代码 
+							xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+						}
+						xmlhttp.onreadystatechange=function()
+						{
+							if (xmlhttp.readyState==4 && xmlhttp.status==200)
+							{
+
+							  var obj= JSON.parse(xmlhttp.responseText);
+									set_info_refresh(obj);//更新数据										
+							}
+						}
+						xmlhttp.open("GET","/val.txt",true);
+						xmlhttp.send();
+					}
+                    loadXMLDoc();
+                   
+		  </script>		  
+
+					
+		  </script>		  
 		</body>
 </html>
