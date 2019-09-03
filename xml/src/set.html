@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="lcd/css/lcd.css" rel="stylesheet">
+	<meta charset="utf-8">
+	<title>箱变配电智能机柜</title>
+    <script src="/lcd/js/set.js"></script>
+</head>
+
+<body onload="startTime()">
+		
+			<div style="height:1000px; width:1024px; background-image:url('lcd/pic/background.jpg');margin:auto;position:absolute;left:0px;top:80px;right:0px;bottom:0px;">
+				<div class="title">
+                    <p style="font-size:48px;color:aqua;margin:30px">箱变配电智能机柜</p>
+				</div>
+				
+					<form   name="theForm"  action="xml.cgi"  method="post" >
+                        <div  class="set_add_warn" style="width:900px; height:100px">
+                              <span style="color:#C0F561;font-size:16px;">路口名称设置 &nbsp;:<input type="text" name="cross_road_name" id="crossname" class="set_input"/>
+                                                                        设备编号设置 &nbsp;:<input type="text" name="device_id"  id="deviceid"  class="set_input" />
+                              </span></br></br>
+                            
+                             <span style="color:#C0F561;font-size:16px;">
+                                 本地网络1设置:<input type="text" name="ip1" id="ip1" class="set_input" > 
+                                 子网掩码1设置:<input type="text" name="mask1" id="mask1" class="set_input" >
+                                 默认网关1设置:<input type="text" name="gateway1" id="gateway1" class="set_input" >
+                            </span></br></br>
+                            
+                             <span style="color:#C0F561;font-size:16px;">
+                                 本地网络2设置:<input type="text" name="ip2" id="ip2" class="set_input" > 
+                                 子网掩码2设置:<input type="text" name="mask2" id="mask2" class="set_input" >
+                                 默认网关2设置:<input type="text" name="gateway2" id="gateway2" class="set_input" >
+                            </span> 
+                            
+                        </div> 
+                        <div class="set_add_warn" >
+                             <p style="color:#C0F561;font-size:16px; ">A3相位定义: <input type="text" name="a3_define" id="a3_define" class="set_input" ></p>
+                             <p style="color:#C0F561;font-size:16px; ">A2相位定义: <input type="text" name="a2_define" id="a2_define" class="set_input" ></p>
+                             <p style="color:#C0F561;font-size:16px; ">A1相位定义: <input type="text" name="a1_define" id="a1_define" class="set_input" ></p>
+                             <p style="color:#C0F561;font-size:16px; ">B3相位定义: <input type="text" name="b3_define" id="b3_define" class="set_input" ></p>
+                             <p style="color:#C0F561;font-size:16px; ">B2相位定义: <input type="text" name="b2_define" id="b2_define" class="set_input" ></p>
+                             <p style="color:#C0F561;font-size:16px; ">B1相位定义: <input type="text" name="b1_define" id="b1_define" class="set_input" ></p>
+                             <p style="color:#C0F561;font-size:16px; ">C3相位定义: <input type="text" name="c3_define" id="c3_define" class="set_input"></p>
+                             <p style="color:#C0F561;font-size:16px; ">C2相位定义: <input type="text" name="c2_define" id="c2_define" class="set_input" ></p>
+                             <p style="color:#C0F561;font-size:16px; ">C1相位定义: <input type="text" name="c1_define" id="c1_define" class="set_input" ></p>
+                          </div>   
+                          <div class="set_add_warn" >
+                             <p style="color:#C0F561;font-size:16px; ">A3报警高阈值: <input type="text" name="a3_warn" id="a3_warn" class="set_input" >mA</p>
+                             <p style="color:#C0F561;font-size:16px; ">A2报警高阈值: <input type="text" name="a2_warn" id="a2_warn" class="set_input" >mA</p>
+                             <p style="color:#C0F561;font-size:16px; ">A1报警高阈值: <input type="text" name="a1_warn" id="a1_warn" class="set_input" >mA</p>
+                             <p style="color:#C0F561;font-size:16px; ">B3报警高阈值: <input type="text" name="b3_warn" id="b3_warn" class="set_input" >mA</p>
+                             <p style="color:#C0F561;font-size:16px; ">B2报警高阈值: <input type="text" name="b2_warn" id="b2_warn" class="set_input" >mA</p>
+                             <p style="color:#C0F561;font-size:16px; ">B1报警高阈值: <input type="text" name="b1_warn" id="b1_warn" class="set_input" >mA</p>
+                             <p style="color:#C0F561;font-size:16px; ">C3报警高阈值: <input type="text" name="c3_warn" id="c3_warn" class="set_input" >mA</p>
+                             <p style="color:#C0F561;font-size:16px; ">C2报警高阈值: <input type="text" name="c2_warn" id="c2_warn" class="set_input" >mA</p>
+                             <p style="color:#C0F561;font-size:16px; ">C1报警高阈值: <input type="text" name="c1_warn" id="c1_warn" class="set_input" >mA</p>
+                          </div>  
+                          <div class="set_add_warn" >
+                             <p style="color:#C0F561;font-size:16px; ">A3报警低阈值: <input type="text" name="a3_warn_l" id="a3_warn_l" class="set_input" >mA</p>
+                             <p style="color:#C0F561;font-size:16px; ">A2报警低阈值: <input type="text" name="a2_warn_l" id="a2_warn_l" class="set_input" >mA</p>
+                             <p style="color:#C0F561;font-size:16px; ">A1报警低阈值: <input type="text" name="a1_warn_l" id="a1_warn_l" class="set_input" >mA</p>
+                             <p style="color:#C0F561;font-size:16px; ">B3报警低阈值: <input type="text" name="b3_warn_l" id="b3_warn_l" class="set_input" >mA</p>
+                             <p style="color:#C0F561;font-size:16px; ">B2报警低阈值: <input type="text" name="b2_warn_l" id="b2_warn_l" class="set_input" >mA</p>
+                             <p style="color:#C0F561;font-size:16px; ">B1报警低阈值: <input type="text" name="b1_warn_l" id="b1_warn_l" class="set_input" >mA</p>
+                             <p style="color:#C0F561;font-size:16px; ">C3报警低阈值: <input type="text" name="c3_warn_l" id="c3_warn_l" class="set_input" >mA</p>
+                             <p style="color:#C0F561;font-size:16px; ">C2报警低阈值: <input type="text" name="c2_warn_l" id="c2_warn_l" class="set_input" >mA</p>
+                             <p style="color:#C0F561;font-size:16px; ">C1报警低阈值: <input type="text" name="c1_warn_l" id="c1_warn_l" class="set_input" >mA</p>
+                          </div>  
+                        
+                        <div class="submit">
+                            <input name="baseinfo"   type="submit" value="设置" onclick="return juge_result()" style="color:#C0F561;font-size:36px; background-color:#0B82E4;border-radius:15px;">
+                            <input  type="reset" value="取消" onclick="cancle_jump()" style="color:#C0F561;font-size:36px; background-color:#0B82E4;border-radius:15px; margin-left:80px;">
+                        </div>
+                       
+					</form>
+					<table border="1">
+							<tr>
+								<td id ="test"></td><td id ="test1"></td>
+							</tr>
+					</table>
+					<div  id="txt"  class="sys_div2"></div>
+			</div>
+
+            <script>
+            set_info() ;
+		  </script>		  
+		</body>
+</html>

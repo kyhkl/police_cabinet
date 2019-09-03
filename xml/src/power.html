@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <link href="lcd/css/lcd.css" rel="stylesheet">
+    <meta  charset="utf-8"/>  
+    <title>智能机柜状态信息</title>
+    <meta charset="utf-8">
+
+    <meta http-equiv="Cache-control" content="no-cache">
+  
+    <script src="/lcd/js/echarts.js"></script>
+    <script src="/lcd/js/power.js"></script>
+    </head>
+
+<body onload="startTime()"  onkeyup="showKeyCode(event)" >
+    
+
+	<div style="height:1000px; width:1024px;background-image:url('lcd/pic/background.jpg');margin:auto;position:absolute;left:0px;top:80px;right:0px;bottom:0px; "  >
+			<div class="title">
+                    <p style="font-size:48px;color:aqua;margin:30px">箱变配电智能机柜</p>
+            </div>
+			
+			
+			<div  class="hp">
+                <div class="hp1"  style="margin-left:50px" >电表数据</div>
+                <div class="hp1"  style="margin-left:300px">采集数据</div>
+                <div class="hp1"  style="margin-left:240px">相位定义</div>
+                <div class="hp1"  style="margin-left:30px" >告警状态</div>
+            </div>
+		
+		
+		
+		<div class="leftside">
+			<div class="boxtd_l">			
+				<table >	
+					<tr>
+						<td class="lefttd">频率    <input id="Hz" type="text" name="test" class="input_style" value="0" disabled="true"/></td>				
+					</tr>		
+					<tr>
+						<td class="lefttd">相电压 Ua<input id="Ua" type="text" name="test" class="input_style" value="0" disabled="true"/></td>				
+					</tr>
+					<tr>
+						<td class="lefttd">相电压 Ub<input id="Ub" type="text" name="test" class="input_style" value="0" disabled="true"/></td>						
+					</tr>
+					<tr>
+						<td class="lefttd">相电压 Uc<input id="Uc" type="text" name="test" class="input_style" value="0" disabled="true"/></td>						
+					</tr>
+					<tr>
+						<td class="lefttd">相电流 Ia<input id="Ia" type="text" name="test" class="input_style" value="0" disabled="true"/></td>
+						
+					</tr>
+					<tr>
+						<td class="lefttd">相电流 Ib<input id="Ib" type="text" name="test" class="input_style" value="0" disabled="true"/></td>					
+					</tr>
+					<tr>
+						<td class="lefttd">相电流 Ic<input id="Ic" type="text" name="test" class="input_style" value="0" disabled="true"/></td>					
+					</tr>
+					<tr>
+						<td class="lefttd">合相有功功率<input id="UT_P" type="text" name="test" class="input_style" value="0" disabled="true"/></td>				
+					</tr>
+					<tr>
+						<td class="lefttd">A 相有功功率<input id="Ua_P" type="text" name="test" class="input_style" value="0" disabled="true"/></td>						
+					</tr>	
+					<tr>
+						<td class="lefttd">B 相有功功率<input id="Ub_P" type="text" name="test" class="input_style" value="0" disabled="true"/></td>
+						
+					</tr>	
+					<tr>
+						<td class="lefttd">C 相有功功率<input id="Uc_P" type="text" name="test" class="input_style" value="0" disabled="true"/></td>						
+					</tr>		
+					
+					<tr>
+						<td class="lefttd">合相无功功率<input id="UT_PV" type="text" name="test" class="input_style" value="0" disabled="true"/></td>
+						
+					</tr>
+					<tr>
+						<td class="lefttd">A 相无功功率<input id="Ua_PV" type="text" name="test" class="input_style" value="0" disabled="true"/></td>						
+					</tr>	
+					<tr>
+						<td class="lefttd">B 相无功功率<input id="Ub_PV" type="text" name="test" class="input_style" value="0" disabled="true"/></td>						
+					</tr>	
+					<tr>
+						<td class="lefttd">C 相无功功率<input id="Uc_PV" type="text" name="test" class="input_style" value="0" disabled="true"/></td>					
+					</tr>			  
+				</table>
+               <script>
+               doUpdate()
+               </script>   
+			</div>
+			<div class="boxtd_r">
+				<table>
+					<tr>
+							<td class="lefttd">Hz</td>					
+					</tr>
+					<tr>
+							<td class="lefttd">V</td>					
+					</tr>
+					<tr>
+							<td class="lefttd">V</td>					
+					</tr>	
+					<tr>
+							<td class="lefttd">V</td>					
+					</tr>	
+					<tr>
+							<td class="lefttd">mA</td>					
+					</tr>	
+					<tr>
+							<td class="lefttd">mA</td>					
+					</tr>	
+					<tr>
+							<td class="lefttd">mA</td>					
+					</tr>	
+                    <tr>
+							<td class="lefttd">W</td>					
+					</tr>
+					<tr>
+							<td class="lefttd">W</td>					
+					</tr>	
+					<tr>
+							<td class="lefttd">W</td>					
+					</tr>	
+					<tr>
+							<td class="lefttd">W</td>					
+					</tr>	
+					<tr>
+							<td class="lefttd">W</td>					
+					</tr>	
+					<tr>
+							<td class="lefttd">W</td>					
+					</tr>
+					<tr>
+							<td class="lefttd">W</td>					
+					</tr>	
+					<tr>
+							<td class="lefttd">W</td>					
+					</tr>		
+				</table>
+			</div>
+		</div>
+	
+		<div id="main" class="realize">
+			<div  style="height:30px;width:780px;background:#494843;">
+				<table id="PhaseA">
+					<tr>
+						<td style="color:#33CC00;width:30px"></td>
+						<td style="color:#33CC00">A相负载电流:</td>
+                        <td style="width:100px;color:#33CC00">0mA</td>
+					</tr>				  
+				</table>
+			</div>
+			<div id="Phase_A" style="height:150px;width:500px;">
+					<script type="text/javascript">charts_a();</script>
+						</div>	</br>
+						<div  style="height:30px;width:780px;background:#494843;">
+							<table id="PhaseB">
+							<tr>
+								<td style="color:#CC3300;width:30px"></td>
+								<td style="color:#CC3300">B相负载电流:</td>
+								<td style="width:100px;color:#CC3300">0mA</td>
+							</tr>				  
+							</table>
+						</div>
+						<div id="Phase_B" style="height:150px;width:500px;">
+							<script type="text/javascript">charts_b();</script>
+						</div>	</br>	
+	
+					<div  style="height:30px;width:780px;background:#494843;">
+						<table id="PhaseC" >
+						<tr>
+							<td style="color:#FFCC00;width:30px"></td>
+							<td style="color:#FFCC00">C相负载电流:</td>
+							<td style="width:100px;color:#FFCC00">0mA</td>
+						</tr>				  
+						</table>
+					</div>
+					
+					<div id="Phase_C" style="height:150px;width:500px;">
+						<script type="text/javascript">charts_c();</script>
+					</div>				
+             <div   class="prase_define">     
+               
+                 <table >               
+                     <tr><td> <input id="A3" type="text"  class="prase_style" style="margin-top:30px"  value=111   disabled="true"/></td></tr>
+                     <tr><td> <input id="A2" type="text"  class="prase_style" style="margin-top:70px"  value=112   disabled="true"/></td></tr>
+                     <tr><td> <input id="A1" type="text"  class="prase_style" style="margin-top:110px" value=113   disabled="true"/></td></tr>
+                      
+                     <tr><td> <input id="B3" type="text"  class="prase_style" style="margin-top:225px" value=114  disabled="true"/></td></tr>
+                     <tr><td> <input id="B2" type="text"  class="prase_style" style="margin-top:265px" value=115  disabled="true"/></td></tr>
+                     <tr><td> <input id="B1" type="text"  class="prase_style" style="margin-top:305px" value=116  disabled="true"/></td></tr>
+                     
+                     <tr><td> <input id="C3" type="text"  class="prase_style" style="margin-top:420px" value=117  disabled="true"/></td></tr>
+                     <tr><td> <input id="C2" type="text"  class="prase_style" style="margin-top:460px" value=118  disabled="true"/></td></tr>
+                     <tr><td> <input id="C1" type="text"  class="prase_style" style="margin-top:500px" value=119  disabled="true"/></td></tr>
+                 </table>
+            
+             </div>
+    
+            <div class="warn_div">
+               
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"    version="1.1" width =90px height=600px>
+                    
+                    <circle id="w1" cx="40" cy="60"  r="14"  stroke="black" stroke-width="3"fill=#00FF00  />
+                    <circle id="w2" cx="40" cy="100" r="14"  stroke="black" stroke-width="3"fill=#00FF00    />
+                    <circle id="w3" cx="40" cy="140" r="14"  stroke="black" stroke-width="3"fill=#00FF00  />
+                        
+                    <circle id="w4" cx="40" cy="265"  r="14"  stroke="black" stroke-width="3"fill=#00FF00  />
+                    <circle id="w5" cx="40" cy="305"  r="14"  stroke="black" stroke-width="3"fill=#00FF00 />
+                    <circle id="w6" cx="40" cy="345"  r="14"  stroke="black" stroke-width="3"fill=#FF0000  />
+                        
+                    <circle id="w7" cx="40" cy="470"  r="14"  stroke="black" stroke-width="3"fill=#FF0000  />
+                    <circle id="w8" cx="40" cy="510"  r="14"  stroke="black" stroke-width="3"fill=#FF0000  />
+                    <circle id="w9" cx="40" cy="550"  r="14"  stroke="black" stroke-width="3"fill=#FF0000  />
+                        
+                    </svg>
+
+            </div >
+					
+			<script type="text/javascript">	
+					doUpdate(); 
+            </script>		  
+		</div>
+    
+    <div class="log"> 
+    <p  style="color:#C0F561;font-size:24px;height:35px;margin: 0px;">日志信息</p>
+        <div  style="width:800px;height:170px;float:left;">
+            <textarea id="log_txt" rows="11" cols="240"  style=" text-align: left; border: 3px solid green;background: transparent;color: aqua;width:800px"></textarea>
+        </div>
+        <div  style="width:160px;height:160px;float:left;">
+           <!-- <input type="button" value="上一页" style="color:#C0F561;font-size:36px; background-color:#0B82E4;margin:0px 30px 0px 10px;" > --> 
+           <!--  <input type="button" value="下一页" style="color:#C0F561;font-size:36px; background-color:#0B82E4;margin:70px 30px 0px 10px;">-->
+        </div>
+        
+            <table   id="equipment" style="font-size:18px;margin:10px 0px 0px 10px;color:#799DF4;">
+                    <tr><td>路口名称:</td><td ></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设备编号:</td><td ></td></tr>   
+            </table>
+            <script>
+             prase_define();
+            </script>         
+    </div>
+
+	<div  id="txt"  class="sys_div2"></div>	
+</body>
+</html>

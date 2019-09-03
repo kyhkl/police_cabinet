@@ -1,0 +1,107 @@
+<?xml version="1.0" ?>
+<BY-LD08>
+    <system-terminal id="1" location="BY-LD08" desc="boyuan vmis xxx" version="1.0" dev_type="0" />
+    <system-admin user="root" password="202cb962ac59075b964b07152d234b70" report_mode="0" baddot_rate="30" />
+    <system-network ip="190.192.18.185" ip_mask="255.255.255.0" gateway="190.192.18.254" mac="7D:32:E9:A8:9F:B5" remote_ip="192.168.1.24" remote_port="5000" server_port="5000" timeout="3600" ip-mask="255.255.255.0" ntp_ip="190.192.1.195" />
+    <hypervelocity id="capture" speed="80" speed_pass_rate="20" distance="601" retardation_offset="0" />
+    <ftp server_ip="190.204.20.26" port="21" user="admin" password="byjt1234" savepath="facecheck" enable="1" />
+    <system-path playlist_path="/opt/playfile" />
+    <equipment>
+        <Provider>01</Provider>
+        <EquipType>101</EquipType>
+        <EquipID>eq1010000000008</EquipID>
+        <EquipName>东纵路瑞景路路口</EquipName>
+    </equipment>
+    <syscong>
+        <serial>
+            <!-- 串口配置-->
+            <mzr_aj12>
+                <!-- Available ports is 1,3,4,5 -->
+                <DataBits>8</DataBits>
+                <Parity>n</Parity>
+                <StopBits>1</StopBits>
+                <PortNum>4</PortNum>
+                <BaudRate>9600</BaudRate>
+            </mzr_aj12>
+            <ele_em>
+                <DataBits>8</DataBits>
+                <Parity>n</Parity>
+                <StopBits>1</StopBits>
+                <PortNum>3</PortNum>
+                <BaudRate>9600</BaudRate>
+            </ele_em>
+        </serial>
+        <cur_des>
+            <cur_one_des range="70" min="0.07" th_hold_h="1000" th_hold_l="100">治安监控</cur_one_des>
+            <cur_two_des  range="70" min="0.07" th_hold_h="1000" th_hold_l="100">网络设备</cur_two_des>
+            <cur_three_des  range="70" min="0.07" th_hold_h="1000" th_hold_l="100">空调宣传屏</cur_three_des>
+            <cur_four_des  range="70" min="0.07" th_hold_h="1000" th_hold_l="100">主控单元</cur_four_des>
+            <cur_five_des  range="70" min="0.07" th_hold_h="1000" th_hold_l="100">视频监控设备</cur_five_des>
+            <cur_six_des  range="70" min="0.07" th_hold_h="1000" th_hold_l="100">电警上杆设备</cur_six_des>
+            <cur_seven_des  range="70" min="0.07" th_hold_h="1000" th_hold_l="100">电警主机</cur_seven_des>
+            <cur_eight_des  range="70" min="0.07" th_hold_h="1000" th_hold_l="100">辅助信号设备</cur_eight_des>
+            <cur_nine_des  range="70" min="0.07" th_hold_h="1000" th_hold_l="100">信号控制机</cur_nine_des>
+        </cur_des>
+        <area_des>
+        </area_des>
+        <mqtt_conf>
+            <brokerURI>tcp://190.204.20.26:1883</brokerURI>
+            <useAuth>false</useAuth>
+            <password>admin</password>
+            <username>admin</username>
+            <sub_topic>command_sub</sub_topic>
+            <sub_qos>1</sub_qos>
+            <pub_topic>command_pub</pub_topic>
+            <pub_qos>1</pub_qos>
+            <!-- 设备故障 -->
+            <fault_topic>SYS_DEVICE_FAULT</fault_topic>
+            <fault_qos>1</fault_qos>
+            <!-- 设备在线 -->
+            <send_time unit="S">60</send_time>
+            <online_topic>SYS_DEVICE_ON_LINE</online_topic>
+            <online_qos>1</online_qos>
+            <!--will_state 字符串3在线 -->
+            <online_state>100</online_state>
+            <!-- 设备离线 -->
+            <will_topic>LAST_WORDS_TOPIC</will_topic>
+            <will_retained>0</will_retained>
+            <will_qos>1</will_qos>
+            <!--will_state 字符串 4 断线 -->
+            <will_state>101</will_state>
+        </mqtt_conf>
+        <door_conf>
+            <passwd>0000000000</passwd>
+            <ipaddr>190.200.13.198</ipaddr>
+            <ipport>4001</ipport>
+        </door_conf>
+        <activemq_xml>
+            <time_out unit="ms">3000</time_out>
+            <!-- false or true 此处由于web配置CGI程序问题 false 应为flase -->
+            <brokerURI>tcp://190.204.20.26:61616?soConnectTimeout=10000</brokerURI>
+            <topic>faultRepQueue</topic>
+            <password>admin</password>
+            <useTopics>flase</useTopics>
+            <username>admin</username>
+        </activemq_xml>
+        <activemq_json>
+            <time_out>3000</time_out>
+            <brokerURI>tcp://190.204.20.26:61616?soConnectTimeout=10000</brokerURI>
+            <topic>terminalEquipmentQueue</topic>
+            <password>admin</password>
+            <useTopics>flase</useTopics>
+            <username>admin</username>
+        </activemq_json>
+		<video>
+        </video>
+        <soundWarning>
+        </soundWarning>
+        <adlamp>
+        </adlamp>
+        <flashlamp>
+        </flashlamp>
+    </syscong>
+    <doorID>
+    </doorID>
+	<face_check>
+	</face_check>
+</BY-LD08>

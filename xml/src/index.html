@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="lcd/css/lcd.css" rel="stylesheet">
+
+<meta  charset="utf-8"/>  
+
+<title>智能机柜状态信息</title>
+
+</head>
+
+<body >
+     <form id="hiddenform" action="xml.cgi" method="post" onsubmit ="true">
+			<input type="hidden" id='submitInput' name='123' value='mm'>
+      </form>
+      <script type="text/javascript"> 
+			function submitForm() 
+			{ 
+			     var frm = document.getElementById("hiddenform");
+				     frm.submit();
+			} 
+			window.onload=function(){submitForm();} 
+	</script>
+</body>
+</html>
