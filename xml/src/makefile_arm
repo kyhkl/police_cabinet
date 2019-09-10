@@ -1,0 +1,28 @@
+
+CC = /home/ky/work/gcc-linaro-arm-linux-gnueabihf-4.7-2013.03-20130313_linux/bin/arm-linux-gnueabihf-g++
+CFLAGS = -I .  
+TARGET = xml.cgi
+objects =  cgic.o ctemplate.o tinyxml2.o
+INSTALL =/www/htdocs/
+
+
+$(TARGET):$(objects)
+
+	$(CC)  -g xml.cpp ctemplate.o cgic.o tinyxml2.o -o xml.cgi -I./   -lpthread -ldl 
+
+ctemplate.o: 
+	$(CC) -I . -c -o ctemplate.o ctemplate.cpp   
+	 
+cgic.o:
+	$(CC)  -I . -c -o cgic.o cgic.cpp 
+	
+tinyxml2.o:
+	$(CC)  -I . -c -o tinyxml2.o tinyxml2.cpp
+	
+install : 
+	cp  index.html set.html power.html  $(INSTALL) -r	
+	cp lcd  /www/htdocs/ -r
+clean :
+	rm *.o  xml.cgi 
+	
+	

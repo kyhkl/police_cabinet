@@ -1,0 +1,7 @@
+1.将index.html set.html power.html 分别拷贝到/www/www/htdocs 和 /www/www/cgi-bin/目录下
+2.将lcd目录拷贝到/www/www/htdocs目录下
+3.修改两个文件夹的权限和拥有者
+4.创建软连接或者硬链接连接sysconf.xml到/www/www/htdocs/目录下
+5.创建软连接或者硬链接连接json.txt到/www/www/htdocs/目录下
+6.创建软连接或者硬链接连接json.txt到/www/www/htdocs/目录下
+7.修改sysconf.xml json.txt json.txt的权限和所有者

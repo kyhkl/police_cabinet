@@ -49,7 +49,7 @@ char c3_warn_l[8]="100";
 char c2_warn_l[8]="100";
 char c1_warn_l[8]="100";
 
-char ip_old[16];
+char ip_old[16]="192.168.1.89";
 //char ip2_old[16];
 char change_ip = 0;
 
@@ -198,7 +198,7 @@ int cgiMain()
         printf("save file successfully\n");
        }
 /***************************  set ip ***************************************************************************************/       
-            if(strcmp(ip_old,ip1)) 
+            if(strcmp(ip_old,ip1)!=0) 
                 {
                     change_ip = 1;
                 }
@@ -209,15 +209,13 @@ int cgiMain()
         cgiHeaderContentType("text/html;charset=utf-8\r\n\r\n");
          fprintf(cgiOut, "Cache-Control: no-cache, must-revalidate\r\n\r\n");
        
-
-
         TMPL_write("/www/htdocs/power.html",0,0,mainList,cgiOut,cgiOut);
         
         if(change_ip)
             {
                 FILE* fp  ;
                 pos = 0 ;
-                fp =    fopen( "/etc/network/interfaces_t", "w+" ); //change ip configure
+                fp =    fopen( "interfaces_t", "w+" ); //change ip configure
                 pos += sprintf(&ip_set_buf[pos], "auto lo\niface lo inet loopback\n");
                 pos += sprintf(&ip_set_buf[pos], "auto eth0\n#iface eth0 inet dhcp\niface eth0 inet static\n"); 
                 pos += sprintf(&ip_set_buf[pos], "address  %s\n",ip1); 
@@ -228,15 +226,12 @@ int cgiMain()
                // pos += sprintf(&ip_set_buf[pos], "address  %s\n",ip2); 
                // pos += sprintf(&ip_set_buf[pos], "netmask %s\n",mask2); 
                // pos += sprintf(&ip_set_buf[pos], "gateway  %s\n",gateway2); 
-             
-                //fputs(ip_set_buf, fp);
-                
-               // sprintf(ip1_tmp,"ifconfig eth0 %s netmask  %s\n",ip1,mask1);
-               // sprintf(ip2_tmp,"ifconfig eth1 %s netmask  %s\n",ip2,mask2);
-              
+                fputs(ip_set_buf, fp);
+            
+                //sprintf(ip1_tmp,"ifconfig eth0 %s netmask  %s\n",ip1,mask1);
+                // sprintf(ip2_tmp,"ifconfig eth1 %s netmask  %s\n",ip2,mask2);
                 //system(ip1_tmp);
-               
-               // system(ip2_tmp);
+                // system(ip2_tmp);
                 fclose(fp);
             }
         
