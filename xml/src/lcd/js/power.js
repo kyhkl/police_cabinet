@@ -315,51 +315,54 @@ function power_info_refresh(obj)
     var i=0;
         
         x=document.getElementById("PhaseA");					
-        x.rows[0].cells[2].innerHTML =obj.MZR.DATA.msg_info.current[3]+obj.MZR.DATA.msg_info.current[4]+obj.MZR.DATA.msg_info.current[5]+'mA';
+        x.rows[0].cells[2].innerHTML =parseFloat(obj.POWER.DATA.power_info.cur_one)+parseFloat(obj.POWER.DATA.power_info.cur_two)+parseFloat(obj.POWER.DATA.power_info.cur_three)+'mA';
         
         x=document.getElementById("PhaseB");						
-        x.rows[0].cells[2].innerHTML =obj.MZR.DATA.msg_info.current[6]+obj.MZR.DATA.msg_info.current[7]+obj.MZR.DATA.msg_info.current[8]+'mA';
+		x.rows[0].cells[2].innerHTML =parseFloat(obj.POWER.DATA.power_info.cur_four)+parseFloat(obj.POWER.DATA.power_info.cur_five)+parseFloat(obj.POWER.DATA.power_info.cur_six)+'mA';
         
         x=document.getElementById("PhaseC");						
-        x.rows[0].cells[2].innerHTML =obj.MZR.DATA.msg_info.current[9]+obj.MZR.DATA.msg_info.current[10]+obj.MZR.DATA.msg_info.current[11]+'mA';
+        x.rows[0].cells[2].innerHTML =parseFloat(obj.POWER.DATA.power_info.cur_seven)+parseFloat(obj.POWER.DATA.power_info.cur_eight)+parseFloat(obj.POWER.DATA.power_info.cur_nine)+'mA';
         
         x=document.getElementById("Hz");
-        x.value=parseInt(obj.ELE_EM.DATA.data[17]*0.01);
+        x.value=(obj.ELE_EM.DATA.ele_em_info.Hz);
         x=document.getElementById("Ua");
-        x.value=parseInt(obj.ELE_EM.DATA.data[3]*0.1);
+        x.value=(obj.ELE_EM.DATA.ele_em_info.Ua);
         x=document.getElementById("Ub");
-        x.value=parseInt(obj.ELE_EM.DATA.data[4]*0.1);
+        x.value=(obj.ELE_EM.DATA.ele_em_info.Ub);
         x=document.getElementById("Uc");
-        x.value=parseInt(obj.ELE_EM.DATA.data[5]*0.1);
+        x.value=(obj.ELE_EM.DATA.ele_em_info.Uc);
         x=document.getElementById("Ia");
-        x.value=obj.ELE_EM.DATA.data[6];
+        x.value=obj.ELE_EM.DATA.ele_em_info.Ia;
         x=document.getElementById("Ib");
-        x.value=obj.ELE_EM.DATA.data[7];
+        x.value=obj.ELE_EM.DATA.ele_em_info.Ib;
         x=document.getElementById("Ic");
-        x.value=obj.ELE_EM.DATA.data[8];
+        x.value=obj.ELE_EM.DATA.ele_em_info.Ic;
         x=document.getElementById("UT_P");
-        x.value=parseInt(obj.ELE_EM.DATA.data[9]*0.1);
+        x.value=(obj.ELE_EM.DATA.ele_em_info.Pt);
         x=document.getElementById("Ua_P");
-        x.value=parseInt(obj.ELE_EM.DATA.data[10]*0.1);
+        x.value=(obj.ELE_EM.DATA.ele_em_info.Pa);
         x=document.getElementById("Ub_P");
-        x.value=parseInt(obj.ELE_EM.DATA.data[11]*0.1);
+        x.value=(obj.ELE_EM.DATA.ele_em_info.Pb);
         x=document.getElementById("Uc_P");
-        x.value=parseInt(obj.ELE_EM.DATA.data[12]*0.1);
+        x.value=(obj.ELE_EM.DATA.ele_em_info.Pc);
         x=document.getElementById("UT_PV");
-        x.value=parseInt(obj.ELE_EM.DATA.data[13]*0.1);
+        x.value=(obj.ELE_EM.DATA.ele_em_info.Qt);
         x=document.getElementById("Ua_PV");
-        x.value=parseInt(obj.ELE_EM.DATA.data[14]*0.1);
+        x.value=(obj.ELE_EM.DATA.ele_em_info.Qt);
         x=document.getElementById("Ub_PV");
-        x.value=parseInt(obj.ELE_EM.DATA.data[15]*0.1);
+        x.value=(obj.ELE_EM.DATA.ele_em_info.Qt);
         x=document.getElementById("Uc_PV");
-        x.value=parseInt(obj.ELE_EM.DATA.data[16]*0.1);
-        
-    for(i=0;i<3;i++)
-    {	
-      option_a.series[0].data[i]=obj.MZR.DATA.msg_info.current[i+3];
-      option_b.series[0].data[i]=obj.MZR.DATA.msg_info.current[i+6];
-      option_c.series[0].data[i]=obj.MZR.DATA.msg_info.current[i+9];				  
-    }
+        x.value=(obj.ELE_EM.DATA.ele_em_info.Qt);
+		option_a.series[0].data[0]=parseFloat(obj.POWER.DATA.power_info.cur_one);
+		option_a.series[0].data[0]=parseFloat(obj.POWER.DATA.power_info.cur_two);
+		option_a.series[0].data[0]=parseFloat(obj.POWER.DATA.power_info.cur_three);
+		option_b.series[0].data[1]=parseFloat(obj.POWER.DATA.power_info.cur_four); 
+		option_b.series[0].data[1]=parseFloat(obj.POWER.DATA.power_info.cur_five);
+		option_b.series[0].data[1]=parseFloat(obj.POWER.DATA.power_info.cur_six);
+		option_c.series[0].data[2]=parseFloat(obj.POWER.DATA.power_info.cur_seven);
+		option_c.series[0].data[2]=parseFloat(obj.POWER.DATA.power_info.cur_eight);
+		option_c.series[0].data[2]=parseFloat(obj.POWER.DATA.power_info.cur_nine);
+
     // 使用刚指定的配置项和数据显示图表。
     myChart_a.setOption(option_a);
     myChart_b.setOption(option_b);
@@ -392,68 +395,58 @@ function power_info_refresh(obj)
             if(s1 != null)
             x.value=s1;   
 
-    if(option_a.series[0].data[2] >= warn[0])
-    {
-            document.getElementById('w1').setAttribute('fill','red');
-    }
-    else if(option_a.series[0].data[2] <= warn_l[0])
-            document.getElementById('w1').setAttribute('fill','red');
-    else
-            document.getElementById('w1').setAttribute('fill','green');  
-                 
-    if(option_a.series[0].data[1] >= warn[1])
-            document.getElementById('w2').setAttribute('fill','red');
-    else if(option_a.series[0].data[1] <= warn_l[1])
-            document.getElementById('w2').setAttribute('fill','red');
-    else
-            document.getElementById('w2').setAttribute('fill','green');
-            
-    if(option_a.series[0].data[0] >= warn[2])
-            document.getElementById('w3').setAttribute('fill','red');
-    else if(option_a.series[0].data[0] <= warn_l[2])
-            document.getElementById('w3').setAttribute('fill','red');
-    else
-            document.getElementById('w3').setAttribute('fill','green');
-            
-    if(option_b.series[0].data[2] >= warn[3])
-            document.getElementById('w4').setAttribute('fill','red');
-    else if(option_b.series[0].data[2] <= warn_l[3])
-            document.getElementById('w4').setAttribute('fill','red');
-    else
-            document.getElementById('w4').setAttribute('fill','green');
-            
-    if(option_b.series[0].data[1] >= warn[4])
-            document.getElementById('w5').setAttribute('fill','red');
-    else if(option_b.series[0].data[1] <= warn_l[4])
-            document.getElementById('w5').setAttribute('fill','red');
-    else
-            document.getElementById('w5').setAttribute('fill','green');
-            
-    if(option_b.series[0].data[0] >= warn[5])
-            document.getElementById('w6').setAttribute('fill','red');
-    else if(option_b.series[0].data[0] <= warn_l[5])
-            document.getElementById('w6').setAttribute('fill','red');
-    else
-            document.getElementById('w6').setAttribute('fill','green');
-            
-    if(option_c.series[0].data[2] >= warn[6])
-            document.getElementById('w7').setAttribute('fill','red');
-    else if(option_c.series[0].data[2] <= warn_l[6])
-            document.getElementById('w7').setAttribute('fill','red');
-    else
-            document.getElementById('w7').setAttribute('fill','green');
-            
-    if(option_c.series[0].data[1] >= warn[7])
-            document.getElementById('w8').setAttribute('fill','red');
-    else if(option_c.series[0].data[1] <= warn_l[7])
-            document.getElementById('w8').setAttribute('fill','red');
-    else
-            document.getElementById('w8').setAttribute('fill','green');
-            
-    if(option_c.series[0].data[0] >= warn[8])
-            document.getElementById('w9').setAttribute('fill','red');
-    else if(option_c.series[0].data[0] <= warn_l[8])
-            document.getElementById('w9').setAttribute('fill','red');
-    else
-            document.getElementById('w9').setAttribute('fill','green');
+if(parseInt(obj.POWER.DATA.power_info.cur_one_status))
+{
+		document.getElementById('w1').setAttribute('fill','red');
+}
+else
+		document.getElementById('w1').setAttribute('fill','green');
+if(parseInt(obj.POWER.DATA.power_info.cur_two_status))
+{
+		document.getElementById('w2').setAttribute('fill','red');
+}
+else
+		document.getElementById('w2').setAttribute('fill','green');
+if(parseInt(obj.POWER.DATA.power_info.cur_three_status))
+{
+		document.getElementById('w3').setAttribute('fill','red');
+}
+else
+		document.getElementById('w3').setAttribute('fill','green');
+if(parseInt(obj.POWER.DATA.power_info.cur_four_status))
+{
+		document.getElementById('w4').setAttribute('fill','red');
+}
+else
+		document.getElementById('w4').setAttribute('fill','green');		
+if(parseInt(obj.POWER.DATA.power_info.cur_five_status))
+{
+		document.getElementById('w5').setAttribute('fill','red');
+}
+else
+		document.getElementById('w5').setAttribute('fill','green');
+if(parseInt(obj.POWER.DATA.power_info.cur_six_status))
+{
+		document.getElementById('w6').setAttribute('fill','red');
+}
+else
+		document.getElementById('w6').setAttribute('fill','green');
+if(parseInt(obj.POWER.DATA.power_info.cur_seven_status))
+{
+		document.getElementById('w7').setAttribute('fill','red');
+}
+else
+		document.getElementById('w7').setAttribute('fill','green');
+if(parseInt(obj.POWER.DATA.power_info.cur_eight_status))
+{
+		document.getElementById('w8').setAttribute('fill','red');
+}
+else
+		document.getElementById('w8').setAttribute('fill','green');
+if(parseInt(obj.POWER.DATA.power_info.cur_nine_status))
+{
+		document.getElementById('w9').setAttribute('fill','red');
+}
+else
+		document.getElementById('w9').setAttribute('fill','green');      
 }
