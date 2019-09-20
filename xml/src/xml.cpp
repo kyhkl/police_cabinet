@@ -21,15 +21,15 @@ char gateway1[16]="192.168.3.254";
 char ip2[16]="192.168.3.89";
 char mask2[16]="255.255.252.0";
 char gateway2[16]="192.168.3.254";
-char a3_define[16]="A3定义";
-char a2_define[16]="A3定义";
-char a1_define[16]="A3定义";
-char b3_define[16]="A3定义";
-char b2_define[16]="A3定义";
-char b1_define[16]="A3定义";
-char c3_define[16]="A3定义";
-char c2_define[16]="A3定义";
-char c1_define[16]="A3定义";
+char a3_define[24]="A3定义";
+char a2_define[24]="A3定义";
+char a1_define[24]="A3定义";
+char b3_define[24]="A3定义";
+char b2_define[24]="A3定义";
+char b1_define[24]="A3定义";
+char c3_define[24]="A3定义";
+char c2_define[24]="A3定义";
+char c1_define[24]="A3定义";
 char a3_warn[8]="100";
 char a2_warn[8]="100";
 char a1_warn[8]="100";
@@ -81,15 +81,15 @@ int cgiMain()
             cgiFormStringNoNewlines("mask2",mask2,16);
             cgiFormStringNoNewlines("gateway2",gateway2,16);
             */
-            cgiFormStringNoNewlines("a3_define",a3_define,16);
-            cgiFormStringNoNewlines("a2_define",a2_define,16);
-            cgiFormStringNoNewlines("a1_define",a1_define,16);
-            cgiFormStringNoNewlines("b3_define",b3_define,16);
-            cgiFormStringNoNewlines("b2_define",b2_define,16);
-            cgiFormStringNoNewlines("b1_define",b1_define,16);
-            cgiFormStringNoNewlines("c3_define",c3_define,16);
-            cgiFormStringNoNewlines("c2_define",c2_define,16);
-            cgiFormStringNoNewlines("c1_define",c1_define,16);
+            cgiFormStringNoNewlines("a3_define",a3_define,24);
+            cgiFormStringNoNewlines("a2_define",a2_define,24);
+            cgiFormStringNoNewlines("a1_define",a1_define,24);
+            cgiFormStringNoNewlines("b3_define",b3_define,24);
+            cgiFormStringNoNewlines("b2_define",b2_define,24);
+            cgiFormStringNoNewlines("b1_define",b1_define,24);
+            cgiFormStringNoNewlines("c3_define",c3_define,24);
+            cgiFormStringNoNewlines("c2_define",c2_define,24);
+            cgiFormStringNoNewlines("c1_define",c1_define,24);
             cgiFormStringNoNewlines("a3_warn",a3_warn,8);
             cgiFormStringNoNewlines("a2_warn",a2_warn,8);
             cgiFormStringNoNewlines("a1_warn",a1_warn,8);
@@ -112,7 +112,7 @@ int cgiMain()
 /*************************************************   update_xml  **************************************************/
             XMLDocument doc;
         
-            doc.LoadFile( "sysconf.xml" );
+            doc.LoadFile( "/etc/sysconf.xml" );
     
             XMLElement* root = doc.RootElement();// get the doucument root node
 	
@@ -148,8 +148,8 @@ int cgiMain()
            XMLElement* cur_des_index;
            
            cur_des_index   = cur_des->FirstChildElement ("cur_one_des");
-           cur_des_index->SetAttribute("th_hold_h",a3_warn);
-           cur_des_index->SetAttribute("th_hold_l",a3_warn_l);
+           cur_des_index->SetAttribute("th_hold_h",a1_warn);
+           cur_des_index->SetAttribute("th_hold_l",a1_warn_l);
            cur_des_index->SetText(a3_define);
        
            cur_des_index  = cur_des_index->NextSiblingElement ("cur_two_des");
@@ -158,13 +158,13 @@ int cgiMain()
            cur_des_index->SetText(a2_define);
            
            cur_des_index  = cur_des_index->NextSiblingElement ("cur_three_des");
-           cur_des_index->SetAttribute("th_hold_h",a1_warn);
-           cur_des_index->SetAttribute("th_hold_l",a1_warn_l);
+           cur_des_index->SetAttribute("th_hold_h",a3_warn);
+           cur_des_index->SetAttribute("th_hold_l",a3_warn_l);
            cur_des_index->SetText(a1_define);
            
            cur_des_index  = cur_des_index->NextSiblingElement ("cur_four_des");
-           cur_des_index->SetAttribute("th_hold_h",b3_warn);
-           cur_des_index->SetAttribute("th_hold_l",b3_warn_l);
+           cur_des_index->SetAttribute("th_hold_h",b1_warn);
+           cur_des_index->SetAttribute("th_hold_l",b1_warn_l);
            cur_des_index->SetText(b3_define);
            
            cur_des_index  = cur_des_index->NextSiblingElement ("cur_five_des");
@@ -173,13 +173,13 @@ int cgiMain()
            cur_des_index->SetText(b2_define);
            
            cur_des_index  = cur_des_index->NextSiblingElement ("cur_six_des");
-           cur_des_index->SetAttribute("th_hold_h",b1_warn);
-           cur_des_index->SetAttribute("th_hold_l",b1_warn_l);
+           cur_des_index->SetAttribute("th_hold_h",b3_warn);
+           cur_des_index->SetAttribute("th_hold_l",b3_warn_l);
            cur_des_index->SetText(b1_define);
            
            cur_des_index  = cur_des_index->NextSiblingElement ("cur_seven_des");
-           cur_des_index->SetAttribute("th_hold_h",c3_warn);
-           cur_des_index->SetAttribute("th_hold_l",c3_warn_l);
+           cur_des_index->SetAttribute("th_hold_h",c1_warn);
+           cur_des_index->SetAttribute("th_hold_l",c1_warn_l);
            cur_des_index->SetText(c3_define);
            
            cur_des_index  = cur_des_index->NextSiblingElement ("cur_eight_des");
@@ -188,14 +188,14 @@ int cgiMain()
            cur_des_index->SetText(c2_define);
            
            cur_des_index  = cur_des_index->NextSiblingElement ("cur_nine_des");
-           cur_des_index->SetAttribute("th_hold_h",c1_warn);
-           cur_des_index->SetAttribute("th_hold_l",c1_warn_l);
+           cur_des_index->SetAttribute("th_hold_h",c3_warn);
+           cur_des_index->SetAttribute("th_hold_l",c3_warn_l);
            cur_des_index->SetText(c1_define);
       
 /***************************  Save File ***************************************************************************************/
-       if(doc.SaveFile("sysconf.xml",false)==XML_SUCCESS )
+       if(doc.SaveFile("/etc/sysconf.xml",false)==XML_SUCCESS )
        {
-        printf("save file successfully\n");
+        //printf("save file successfully\n");
        }
 /***************************  set ip ***************************************************************************************/       
             if(strcmp(ip_old,ip1)!=0) 
@@ -207,15 +207,14 @@ int cgiMain()
         
         // 使用cgic接口，输出文档类型
         cgiHeaderContentType("text/html;charset=utf-8\r\n\r\n");
-         fprintf(cgiOut, "Cache-Control: no-cache, must-revalidate\r\n\r\n");
        
-        TMPL_write("/www/htdocs/power.html",0,0,mainList,cgiOut,cgiOut);
+        TMPL_write("power.html",0,0,mainList,cgiOut,cgiOut);
         
         if(change_ip)
             {
                 FILE* fp  ;
                 pos = 0 ;
-                fp =    fopen( "interfaces_t", "w+" ); //change ip configure
+                fp =    fopen( "/etc/network/interfaces", "w+" ); //change ip configure
                 pos += sprintf(&ip_set_buf[pos], "auto lo\niface lo inet loopback\n");
                 pos += sprintf(&ip_set_buf[pos], "auto eth0\n#iface eth0 inet dhcp\niface eth0 inet static\n"); 
                 pos += sprintf(&ip_set_buf[pos], "address  %s\n",ip1); 

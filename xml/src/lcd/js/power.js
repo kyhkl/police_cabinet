@@ -9,7 +9,7 @@ function showKeyCode(event)
         var str = cars.join('-');//转化为字符串
         if((str == cmp_str)||(str == cmp_str1))//比较
         {
-             window.open("../../set.html","_self");
+             window.open("/set.html","_self");
              i=0;
              cars[0]=0;
              cars[1]=0;
@@ -59,14 +59,12 @@ function loadXMLDoc()
             {
                 if (xmlhttp.readyState==4 && xmlhttp.status==200)
                 {
-                        var obj= JSON.parse(xmlhttp.responseText);
-                       
+                        var obj= JSON.parse(xmlhttp.responseText);              
                               power_info_refresh(obj);//更新数据	   
-
                 }
             }
          
-            xmlhttp.open("GET","../../json.txt",true);
+            xmlhttp.open("GET","/json.txt",true);
             xmlhttp.send();
         }
     
@@ -91,9 +89,9 @@ function loadXMLDoc()
                 top: 10//距离上边的距离
                 },
         xAxis: {
-             name:'单位(mA)'
+             name:'单位(A)'
         },
-        yAxis: {data: ["A1","A2","A3",]},
+        yAxis: {data: ["A3","A2","A1",]},
         series: [{
             id:'bar',
             name: '',
@@ -103,7 +101,7 @@ function loadXMLDoc()
                             position: 'right',
                              formatter:function(params){
                                  
-                                 return params.data+'mA';
+                                 return params.data+'A';
                                  },
                             show: true,
                             color:'#33CC00',
@@ -139,9 +137,9 @@ function loadXMLDoc()
                 top: 10//距离上边的距离
                 },
             xAxis: {
-                 name:'单位(mA)'
+                 name:'单位(A)'
             },
-            yAxis: {data: ["B1","B2","B3",]},
+            yAxis: {data: ["B3","B2","B1",]},
             series: [{
                 id:'bar',
                 name: '',
@@ -151,7 +149,7 @@ function loadXMLDoc()
                                 position: 'right',
                                  formatter:function(params){
                                      
-                                     return params.data+'mA';
+                                     return params.data+'A';
                                      },
                                 show: true,
                                 color:'#CC3300',
@@ -187,9 +185,9 @@ function loadXMLDoc()
                 top: 10//距离上边的距离
                 },
             xAxis: {
-                 name:'单位(mA)'
+                 name:'单位(A)'
             },
-            yAxis: {data: ["C1","C2","C3",]},
+            yAxis: {data: ["C3","C2","C1",]},
             series: [{
                 id:'bar',
                 name: '',
@@ -199,7 +197,7 @@ function loadXMLDoc()
                                 position: 'right',
                                  formatter:function(params){
                                      
-                                     return params.data+'mA';
+                                     return params.data+'A';
                                      },
                                 show: true,
                                 color:'#FFCC00',
@@ -249,8 +247,7 @@ function loadXMLDoc()
                 }
                 
             //------------------------------------ prase define
-     var warn = new Array();
-     var warn_l = new Array();
+
     function prase_define() 
         {
             if (window.XMLHttpRequest)
@@ -261,68 +258,52 @@ function loadXMLDoc()
             {
                 xhttp=new ActiveXObject("Microsoft.XMLHTTP");
             }
-            xhttp.open("GET","../../sysconf.xml",false);
+            xhttp.open("GET","/sysconf.xml",false);
             xhttp.send();
-            xmlDoc=xhttp.responseXML;
-          document .getElementById ("A3").value=xmlDoc.getElementsByTagName("cur_one_des")[0].childNodes[0].nodeValue; 
-          document .getElementById ("A2").value=xmlDoc.getElementsByTagName("cur_two_des")[0].childNodes[0].nodeValue;
-          document .getElementById ("A1").value=xmlDoc.getElementsByTagName("cur_three_des")[0].childNodes[0].nodeValue; 
-          document .getElementById ("B3").value=xmlDoc.getElementsByTagName("cur_four_des")[0].childNodes[0].nodeValue; 
-          document .getElementById ("B2").value=xmlDoc.getElementsByTagName("cur_five_des")[0].childNodes[0].nodeValue; 
-          document .getElementById ("B1").value=xmlDoc.getElementsByTagName("cur_six_des")[0].childNodes[0].nodeValue; 
-          document .getElementById ("C3").value=xmlDoc.getElementsByTagName("cur_seven_des")[0].childNodes[0].nodeValue; 
-          document .getElementById ("C2").value=xmlDoc.getElementsByTagName("cur_eight_des")[0].childNodes[0].nodeValue;
-          document .getElementById ("C1").value=xmlDoc.getElementsByTagName("cur_nine_des")[0].childNodes[0].nodeValue;
-     
-          document .getElementById ("equipment").rows[0].cells[1].innerHTML=xmlDoc.getElementsByTagName("EquipName")[0].childNodes[0].textContent;
-          document .getElementById ("equipment").rows[0].cells[3].innerHTML=xmlDoc.getElementsByTagName("EquipID")[0].childNodes[0].textContent;
-          
-          x=xmlDoc.getElementsByTagName("cur_one_des")[0] ; 
-          warn[0]= x.getAttribute("th_hold_h");
-          warn_l[0]= x.getAttribute("th_hold_l");
-          x=xmlDoc.getElementsByTagName("cur_two_des")[0] ;
-          warn[1]= x.getAttribute("th_hold_h");
-          warn_l[1]= x.getAttribute("th_hold_l");
-          x=xmlDoc.getElementsByTagName("cur_three_des")[0] ;
-          warn[2]= x.getAttribute("th_hold_h");
-          warn_l[2]= x.getAttribute("th_hold_l");
-          x=xmlDoc.getElementsByTagName("cur_four_des")[0] ;
-          warn[3]= x.getAttribute("th_hold_h");
-          warn_l[3]= x.getAttribute("th_hold_l");
-          x=xmlDoc.getElementsByTagName("cur_five_des")[0] ;
-          warn[4]= x.getAttribute("th_hold_h");
-          warn_l[4]= x.getAttribute("th_hold_l");
-          x=xmlDoc.getElementsByTagName("cur_six_des")[0] ;
-          warn[5]= x.getAttribute("th_hold_h");
-          warn_l[5]= x.getAttribute("th_hold_l");
-          x=xmlDoc.getElementsByTagName("cur_seven_des")[0] ;
-          warn[6]= x.getAttribute("th_hold_h");
-          warn_l[6]= x.getAttribute("th_hold_l");
-          x=xmlDoc.getElementsByTagName("cur_eight_des")[0] ;
-          warn[7]= x.getAttribute("th_hold_h");
-          warn_l[7]= x.getAttribute("th_hold_l");
-          x=xmlDoc.getElementsByTagName("cur_nine_des")[0] ;
-          warn[8]= x.getAttribute("th_hold_h");
-          warn_l[8]= x.getAttribute("th_hold_l");
-         
+            //xmlDoc=xhttp.responseXML;
+			/*
+			xhttp.onreadystatechange=function()
+            {
+			  if (xhttp.readyState==4 && xhttp.status==200)
+                {
+					*/
+					xmlDoc=xhttp.responseXML;   
+					document .getElementById ("A3").value=xmlDoc.getElementsByTagName("cur_one_des")[0].childNodes[0].nodeValue; 
+					document .getElementById ("A2").value=xmlDoc.getElementsByTagName("cur_two_des")[0].childNodes[0].nodeValue;
+					document .getElementById ("A1").value=xmlDoc.getElementsByTagName("cur_three_des")[0].childNodes[0].nodeValue; 
+					document .getElementById ("B3").value=xmlDoc.getElementsByTagName("cur_four_des")[0].childNodes[0].nodeValue; 
+					document .getElementById ("B2").value=xmlDoc.getElementsByTagName("cur_five_des")[0].childNodes[0].nodeValue; 
+					document .getElementById ("B1").value=xmlDoc.getElementsByTagName("cur_six_des")[0].childNodes[0].nodeValue; 
+					document .getElementById ("C3").value=xmlDoc.getElementsByTagName("cur_seven_des")[0].childNodes[0].nodeValue; 
+					document .getElementById ("C2").value=xmlDoc.getElementsByTagName("cur_eight_des")[0].childNodes[0].nodeValue;
+					document .getElementById ("C1").value=xmlDoc.getElementsByTagName("cur_nine_des")[0].childNodes[0].nodeValue;
+
+					document .getElementById ("equipment").rows[0].cells[1].innerHTML=xmlDoc.getElementsByTagName("EquipName")[0].childNodes[0].textContent;
+					document .getElementById ("equipment").rows[0].cells[3].innerHTML=xmlDoc.getElementsByTagName("EquipID")[0].childNodes[0].textContent;
+				
+             //   }
+			//}
         }
 //------------------------------------------reflash data info
-   
-var warn=new Array();
-var warn_l=new Array();		
+
+var scroll_flag  = 1;	
 function power_info_refresh(obj)
 {
     var i=0;
         
         x=document.getElementById("PhaseA");					
-        x.rows[0].cells[2].innerHTML =parseFloat(obj.POWER.DATA.power_info.cur_one)+parseFloat(obj.POWER.DATA.power_info.cur_two)+parseFloat(obj.POWER.DATA.power_info.cur_three)+'mA';
-        
+        var num =(parseFloat(obj.POWER.DATA.power_info.cur_one)+parseFloat(obj.POWER.DATA.power_info.cur_two)+parseFloat(obj.POWER.DATA.power_info.cur_three));
+        num = num.toFixed(2);
+	    x.rows[0].cells[2].innerHTML=num+'A';
         x=document.getElementById("PhaseB");						
-		x.rows[0].cells[2].innerHTML =parseFloat(obj.POWER.DATA.power_info.cur_four)+parseFloat(obj.POWER.DATA.power_info.cur_five)+parseFloat(obj.POWER.DATA.power_info.cur_six)+'mA';
-        
-        x=document.getElementById("PhaseC");						
-        x.rows[0].cells[2].innerHTML =parseFloat(obj.POWER.DATA.power_info.cur_seven)+parseFloat(obj.POWER.DATA.power_info.cur_eight)+parseFloat(obj.POWER.DATA.power_info.cur_nine)+'mA';
-        
+		num=(parseFloat(obj.POWER.DATA.power_info.cur_four)+parseFloat(obj.POWER.DATA.power_info.cur_five)+parseFloat(obj.POWER.DATA.power_info.cur_six));
+        num = num.toFixed(2);
+	    x.rows[0].cells[2].innerHTML=num+'A';
+        x=document.getElementById("PhaseC");	
+        num =(parseFloat(obj.POWER.DATA.power_info.cur_seven)+parseFloat(obj.POWER.DATA.power_info.cur_eight)+parseFloat(obj.POWER.DATA.power_info.cur_nine));
+        num = num.toFixed(2);
+	    x.rows[0].cells[2].innerHTML=num+'A';
+		
         x=document.getElementById("Hz");
         x.value=(obj.ELE_EM.DATA.ele_em_info.Hz);
         x=document.getElementById("Ua");
@@ -348,20 +329,24 @@ function power_info_refresh(obj)
         x=document.getElementById("UT_PV");
         x.value=(obj.ELE_EM.DATA.ele_em_info.Qt);
         x=document.getElementById("Ua_PV");
-        x.value=(obj.ELE_EM.DATA.ele_em_info.Qt);
+        x.value=(obj.ELE_EM.DATA.ele_em_info.Qa);
         x=document.getElementById("Ub_PV");
-        x.value=(obj.ELE_EM.DATA.ele_em_info.Qt);
+        x.value=(obj.ELE_EM.DATA.ele_em_info.Qb);
         x=document.getElementById("Uc_PV");
-        x.value=(obj.ELE_EM.DATA.ele_em_info.Qt);
-		option_a.series[0].data[0]=parseFloat(obj.POWER.DATA.power_info.cur_one);
-		option_a.series[0].data[0]=parseFloat(obj.POWER.DATA.power_info.cur_two);
+        x.value=(obj.ELE_EM.DATA.ele_em_info.Qc);
+		
+		
+		option_a.series[0].data[2]=parseFloat(obj.POWER.DATA.power_info.cur_one);
+		option_a.series[0].data[1]=parseFloat(obj.POWER.DATA.power_info.cur_two);
 		option_a.series[0].data[0]=parseFloat(obj.POWER.DATA.power_info.cur_three);
-		option_b.series[0].data[1]=parseFloat(obj.POWER.DATA.power_info.cur_four); 
+		option_b.series[0].data[2]=parseFloat(obj.POWER.DATA.power_info.cur_four);
 		option_b.series[0].data[1]=parseFloat(obj.POWER.DATA.power_info.cur_five);
-		option_b.series[0].data[1]=parseFloat(obj.POWER.DATA.power_info.cur_six);
+		option_b.series[0].data[0]=parseFloat(obj.POWER.DATA.power_info.cur_six);
 		option_c.series[0].data[2]=parseFloat(obj.POWER.DATA.power_info.cur_seven);
-		option_c.series[0].data[2]=parseFloat(obj.POWER.DATA.power_info.cur_eight);
-		option_c.series[0].data[2]=parseFloat(obj.POWER.DATA.power_info.cur_nine);
+		option_c.series[0].data[1]=parseFloat(obj.POWER.DATA.power_info.cur_eight);
+		option_c.series[0].data[0]=parseFloat(obj.POWER.DATA.power_info.cur_nine);
+		
+		
 
     // 使用刚指定的配置项和数据显示图表。
     myChart_a.setOption(option_a);
@@ -375,78 +360,92 @@ function power_info_refresh(obj)
             {
                 xhttp=new ActiveXObject("Microsoft.XMLHTTP");
             }
-            xhttp.open("GET","../../log.txt",false);
+            xhttp.open("GET","/log.txt",true);
             xhttp.send();
-            var s = xhttp.responseText;
+            //var s = xhttp.responseText;
             
-            var n = s.lastIndexOf("\n"); 
-            var tmp_n;
-            var i = 100;
-            while(i--)
+			xhttp.onreadystatechange=function()
             {
-                if(n == -1)
-                    break;
-                tmp_n = n;
-                n = s.lastIndexOf("\n",n-1);   
-            }
-            var s1=  s.slice(tmp_n+1,s.length - 1);
-            
-            x= document.getElementById ("log_txt");
-            if(s1 != null)
-            x.value=s1;   
+			  if (xhttp.readyState==4 && xhttp.status==200)
+                {
+					var s = xhttp.responseText;
+			
+					var n = s.lastIndexOf("\n"); 
+					var tmp_n;
+					var i = 100;
+					while(i--)
+					{
+						if(n == -1)
+							break;
+						tmp_n = n;
+						n = s.lastIndexOf("\n",n-1);   
+					}
+					var s1=  s.slice(tmp_n+1,s.length - 1);
+					
+					x= document.getElementById ("log_txt");
+					if(s1 != null)
+					x.value=s1;   
+					if(scroll_flag)
+					{
+						scroll_flag = 0;	
+						x.scrollTop = x.scrollHeight; // good
+					}
+					
+				}
+			}
 
-if(parseInt(obj.POWER.DATA.power_info.cur_one_status))
-{
-		document.getElementById('w1').setAttribute('fill','red');
-}
-else
-		document.getElementById('w1').setAttribute('fill','green');
-if(parseInt(obj.POWER.DATA.power_info.cur_two_status))
-{
-		document.getElementById('w2').setAttribute('fill','red');
-}
-else
-		document.getElementById('w2').setAttribute('fill','green');
-if(parseInt(obj.POWER.DATA.power_info.cur_three_status))
-{
-		document.getElementById('w3').setAttribute('fill','red');
-}
-else
-		document.getElementById('w3').setAttribute('fill','green');
-if(parseInt(obj.POWER.DATA.power_info.cur_four_status))
-{
-		document.getElementById('w4').setAttribute('fill','red');
-}
-else
-		document.getElementById('w4').setAttribute('fill','green');		
-if(parseInt(obj.POWER.DATA.power_info.cur_five_status))
-{
-		document.getElementById('w5').setAttribute('fill','red');
-}
-else
-		document.getElementById('w5').setAttribute('fill','green');
-if(parseInt(obj.POWER.DATA.power_info.cur_six_status))
-{
-		document.getElementById('w6').setAttribute('fill','red');
-}
-else
-		document.getElementById('w6').setAttribute('fill','green');
-if(parseInt(obj.POWER.DATA.power_info.cur_seven_status))
-{
-		document.getElementById('w7').setAttribute('fill','red');
-}
-else
-		document.getElementById('w7').setAttribute('fill','green');
-if(parseInt(obj.POWER.DATA.power_info.cur_eight_status))
-{
-		document.getElementById('w8').setAttribute('fill','red');
-}
-else
-		document.getElementById('w8').setAttribute('fill','green');
-if(parseInt(obj.POWER.DATA.power_info.cur_nine_status))
-{
-		document.getElementById('w9').setAttribute('fill','red');
-}
-else
-		document.getElementById('w9').setAttribute('fill','green');      
-}
+		if(parseInt(obj.POWER.DATA.power_info.cur_one_status))
+		{
+				document.getElementById('w1').setAttribute('fill','red');
+		}
+		else
+				document.getElementById('w1').setAttribute('fill','green');
+		if(parseInt(obj.POWER.DATA.power_info.cur_two_status))
+		{
+				document.getElementById('w2').setAttribute('fill','red');
+		}
+		else
+				document.getElementById('w2').setAttribute('fill','green');
+		if(parseInt(obj.POWER.DATA.power_info.cur_three_status))
+		{
+				document.getElementById('w3').setAttribute('fill','red');
+		}
+		else
+				document.getElementById('w3').setAttribute('fill','green');
+		if(parseInt(obj.POWER.DATA.power_info.cur_four_status))
+		{
+				document.getElementById('w4').setAttribute('fill','red');
+		}
+		else
+				document.getElementById('w4').setAttribute('fill','green');		
+		if(parseInt(obj.POWER.DATA.power_info.cur_five_status))
+		{
+				document.getElementById('w5').setAttribute('fill','red');
+		}
+		else
+				document.getElementById('w5').setAttribute('fill','green');
+		if(parseInt(obj.POWER.DATA.power_info.cur_six_status))
+		{
+				document.getElementById('w6').setAttribute('fill','red');
+		}
+		else
+				document.getElementById('w6').setAttribute('fill','green');
+		if(parseInt(obj.POWER.DATA.power_info.cur_seven_status))
+		{
+				document.getElementById('w7').setAttribute('fill','red');
+		}
+		else
+				document.getElementById('w7').setAttribute('fill','green');
+		if(parseInt(obj.POWER.DATA.power_info.cur_eight_status))
+		{
+				document.getElementById('w8').setAttribute('fill','red');
+		}
+		else
+				document.getElementById('w8').setAttribute('fill','green');
+		if(parseInt(obj.POWER.DATA.power_info.cur_nine_status))
+		{
+				document.getElementById('w9').setAttribute('fill','red');
+		}
+		else
+				document.getElementById('w9').setAttribute('fill','green');      
+		}
